@@ -1,0 +1,78 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="hero-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#141814" />
+      <stop offset="50%" stop-color="#181e18" />
+      <stop offset="100%" stop-color="#0f1310" />
+    </linearGradient>
+    <linearGradient id="amber-glow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f2b84b" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#f2b84b" stop-opacity="0" />
+    </linearGradient>
+    <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#252e25" stroke-width="1" />
+    </pattern>
+  </defs>
+
+  <rect width="800" height="600" fill="url(#hero-bg)" />
+  <rect width="800" height="600" fill="url(#grid)" opacity="0.8" />
+
+  <!-- Outer Specimen Frame -->
+  <rect x="25" y="25" width="750" height="550" fill="none" stroke="#394036" stroke-width="1" />
+  <rect x="35" y="35" width="730" height="530" fill="none" stroke="#232b23" stroke-width="1" stroke-dasharray="8,6" />
+
+  <!-- Corner Brackets -->
+  <path d="M 25 55 L 25 25 L 55 25" fill="none" stroke="#f2b84b" stroke-width="2.5" />
+  <path d="M 775 55 L 775 25 L 745 25" fill="none" stroke="#f2b84b" stroke-width="2.5" />
+  <path d="M 25 545 L 25 575 L 55 575" fill="none" stroke="#f2b84b" stroke-width="2.5" />
+  <path d="M 775 545 L 775 575 L 745 575" fill="none" stroke="#f2b84b" stroke-width="2.5" />
+
+  <!-- Telemetry Header Text -->
+  <text x="60" y="70" font-family="'Space Mono', monospace" font-size="11" fill="#f2b84b" letter-spacing="2">SPECIMEN // BIO-TELEMETRY CONSOLE</text>
+  <text x="740" y="70" text-anchor="end" font-family="'Space Mono', monospace" font-size="10" fill="#8da088" letter-spacing="1">SAMPLE: AN-001 // CHR 08:76.94</text>
+  <line x1="60" y1="85" x2="740" y2="85" stroke="#344234" stroke-width="1" />
+
+  <!-- Circular Radar / Orbital Biosystems Scope -->
+  <g transform="translate(240, 290)">
+    <circle cx="0" cy="0" r="140" fill="none" stroke="#2a382b" stroke-width="1.5" />
+    <circle cx="0" cy="0" r="100" fill="none" stroke="#354536" stroke-width="1" stroke-dasharray="4,4" />
+    <circle cx="0" cy="0" r="60" fill="none" stroke="#2a382b" stroke-width="1" />
+    <circle cx="0" cy="0" r="20" fill="none" stroke="#f2b84b" stroke-width="1" />
+    <line x1="-155" y1="0" x2="155" y2="0" stroke="#354536" stroke-width="1" />
+    <line x1="0" y1="-155" x2="0" y2="155" stroke="#354536" stroke-width="1" />
+    <path d="M 0 0 L 120 -80" stroke="#f2b84b" stroke-width="1.5" opacity="0.75" />
+    <circle cx="120" cy="-80" r="4" fill="#f2b84b" />
+    <circle cx="-50" cy="70" r="3" fill="#b8d18d" />
+    <circle cx="80" cy="60" r="3" fill="#f2b84b" opacity="0.6" />
+    <text x="130" y="-85" font-family="'Space Mono', monospace" font-size="9" fill="#f2b84b">LOCK // +8.82</text>
+  </g>
+
+  <!-- Waveform / Sequencing Signal -->
+  <g transform="translate(420, 140)">
+    <rect x="0" y="0" width="320" height="150" fill="#131913" stroke="#2f3d2f" stroke-width="1" />
+    <text x="15" y="25" font-family="'Space Mono', monospace" font-size="9" fill="#f2b84b" letter-spacing="1">ELECTROPHORETIC TRACE [dG/dt]</text>
+    <path d="M 15 110 Q 50 20 80 90 T 150 120 T 220 40 T 290 85 T 310 95" fill="none" stroke="#f2b84b" stroke-width="2" />
+    <path d="M 15 110 Q 50 20 80 90 T 150 120 T 220 40 T 290 85 T 310 95 L 310 135 L 15 135 Z" fill="url(#amber-glow)" />
+    <path d="M 15 95 Q 60 110 100 60 T 180 80 T 240 120 T 305 70" fill="none" stroke="#b8d18d" stroke-width="1.5" stroke-dasharray="3,3" opacity="0.8" />
+  </g>
+
+  <!-- DNA Base Matrix / Signal Telemetry -->
+  <g transform="translate(420, 310)">
+    <rect x="0" y="0" width="320" height="210" fill="#131913" stroke="#2f3d2f" stroke-width="1" />
+    <text x="15" y="25" font-family="'Space Mono', monospace" font-size="9" fill="#f2b84b" letter-spacing="1">TARGET SEQUENCE [FASTQ FILTERED]</text>
+    
+    <!-- Matrix Grid Rows -->
+    <g font-family="'Space Mono', monospace" font-size="10" fill="#697a68" letter-spacing="3">
+      <text x="15" y="55">001  A T C G C G A T  <tspan fill="#f2b84b">T A G C</tspan>  C G A T</text>
+      <text x="15" y="80">002  G C T A T T C G  G C C A  <tspan fill="#b8d18d">A T T G</tspan></text>
+      <text x="15" y="105">003  T T C G A T C C  <tspan fill="#f2b84b">G G A T</tspan>  T A A C</text>
+      <text x="15" y="130">004  C G A T A A T G  C A T C  G C C T</text>
+      <text x="15" y="155">005  A T G C T G C A  <tspan fill="#b8d18d">T T G C</tspan>  A T G C</text>
+      <text x="15" y="180">006  <tspan fill="#f2b84b">CONSENSUS MATCH: 99.4% // 12 MARKERS</tspan></text>
+    </g>
+  </g>
+
+  <!-- Bottom Coordinates -->
+  <text x="60" y="540" font-family="'Space Mono', monospace" font-size="9" fill="#8a9985">SYSTEM HEALTH: NOMINAL // ALL PIPELINES ACTIVE</text>
+  <circle cx="48" cy="537" r="4" fill="#b8d18d" />
+</svg>

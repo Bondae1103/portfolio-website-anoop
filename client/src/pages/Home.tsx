@@ -30,7 +30,7 @@ const projects = [
     description:
       "An end-to-end pipeline that combines five feature-selection methods with machine learning to identify 12 consensus biomarkers, then tests robustness through LOOCV and SHAP interpretation.",
     stack: ["Python", "R", "limma", "edgeR", "Scikit-learn", "SHAP"],
-    image: "/manus-storage/fossil-signal-genomics_8ca245e3.png",
+    image: "/images/fossil-signal-genomics.svg",
     metric: "12 consensus biomarkers",
   },
   {
@@ -40,7 +40,7 @@ const projects = [
     description:
       "A containerized Random Forest inference pipeline using AWS Lambda and S3 event triggers to automate antibiotic-resistance prediction from M. tuberculosis VCF files.",
     stack: ["Python", "AWS Lambda", "S3", "Docker", "cyvcf2"],
-    image: "/manus-storage/fossil-signal-hero_1b7ae681.png",
+    image: "/images/fossil-signal-variant.svg",
     metric: "82% model accuracy",
   },
   {
@@ -50,7 +50,7 @@ const projects = [
     description:
       "An end-to-end plant disease detection workflow: dataset annotation with CVAT, image preparation, and YOLOv8/ResNet model development for the AgriThon Hackathon 2025.",
     stack: ["Python", "YOLOv8", "ResNet", "OpenCV", "CVAT"],
-    image: "/manus-storage/fossil-signal-vision_af31d612.png",
+    image: "/images/fossil-signal-vision.svg",
     metric: "78% validation accuracy",
   },
   {
@@ -60,7 +60,7 @@ const projects = [
     description:
       "A Bash automation pipeline integrating GROMACS and Bio3D to profile RMSD, RMSF, DCCM, and radius of gyration for HIV protease–ligand complexes.",
     stack: ["GROMACS", "Bash", "Bio3D", "R", "Linux"],
-    image: "/manus-storage/fossil-signal-md_a8e4f06e.png",
+    image: "/images/fossil-signal-md.svg",
     metric: "4 trajectory measures",
   },
 ];
@@ -87,7 +87,7 @@ export default function Home() {
       <div className="ambient-grid" aria-hidden="true" />
       <header className="topbar">
         <a className="brand-lockup" href="#top" onClick={closeMobile} aria-label="Anoop Nair home">
-          <img src="/manus-storage/fossil-signal-mark_1394e5a7.png" alt="" className="brand-mark" />
+          <img src="/images/mark.svg" alt="" className="brand-mark" />
           <span><b>ANOOP</b><small>/ NAIR</small></span>
         </a>
         <button className="mobile-menu" aria-label={mobileOpen ? "Close navigation" : "Open navigation"} onClick={() => setMobileOpen(!mobileOpen)}>{mobileOpen ? <X /> : <Menu />}</button>
@@ -123,7 +123,7 @@ export default function Home() {
               <div className="hero-actions"><a className="primary-action" href="#work">VIEW SELECTED WORK <ChevronRight size={17} /></a><a className="text-action" href="#contact">SEND A SIGNAL <ArrowUpRight size={15} /></a></div>
             </div>
             <div className="hero-art">
-              <img src="/manus-storage/fossil-signal-hero_1b7ae681.png" alt="Amber-lit computational biology research console" />
+              <img src="/images/fossil-signal-hero.svg" alt="Amber-lit computational biology research console" />
               <div className="hero-overlay-label top">SPECIMEN / AN-001<br /><span>BIOSYSTEMS INTERFACE</span></div>
               <div className="hero-overlay-label bottom"><span className="pulse-dot" /> SIGNAL LOCKED<br /><span>LAT 08.52° N / LONG 76.94° E</span></div>
             </div>
