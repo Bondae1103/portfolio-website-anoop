@@ -5,10 +5,10 @@ import {
   Atom,
   Award,
   BookOpen,
-  CheckCircle2,
   ChevronRight,
   CircleDot,
   Code2,
+  Compass,
   Cpu,
   Database,
   Dna,
@@ -18,7 +18,6 @@ import {
   Linkedin,
   Mail,
   Menu,
-  MessageSquare,
   Microscope,
   Phone,
   ScanLine,
@@ -86,7 +85,7 @@ const skillGroups = [
   {
     label: "SOFTWARE ENGINEERING & TESTING",
     icon: Terminal,
-    items: "Playwright · Selenium · AWS (Lambda, S3) · Docker · Git · CI/CD · REST APIs · Linux · Embedded Systems / IoT",
+    items: "Playwright · Selenium · AWS (Lambda, S3) · Docker · Git · CI/CD · REST APIs · Linux",
   },
   {
     label: "MACHINE LEARNING & AI",
@@ -157,60 +156,38 @@ const educationList = [
   {
     institution: "ST. THOMAS RESIDENTIAL CENTRAL SCHOOL",
     degree: "Senior Secondary (Class XII) & High School (Class X)",
-    specialization: "Science & Computer Science Stream",
+    specialization: null,
     period: "2010 — 2022",
     location: "THIRUVANANTHAPURAM, KERALA, INDIA",
     score: "Class XII: 92% · Class X: 91%",
     description:
-      "Graduated with top academic honors in Physics, Chemistry, Mathematics, and Computer Science.",
+      "Graduated with distinguished academic honors across secondary and senior secondary school education.",
   },
 ];
 
-const certifications = [
-  {
-    title: "AI Fluency Framework & Foundations",
-    issuer: "PROFESSIONAL CERTIFICATION",
-    badge: "AI & PROMPT ENGINEERING",
-    description:
-      "Comprehensive certification covering modern LLM fundamentals, prompt engineering architectures, AI fluency, and applied agentic workflows.",
-  },
-  {
-    title: "Playwright & Java Test Automation",
-    issuer: "ENTERPRISE QA AUTOMATION",
-    badge: "TESTING & CI/CD",
-    description:
-      "Practical experience building robust end-to-end browser automation suites, Page Object Models, and continuous testing workflows.",
-  },
-  {
-    title: "Applied Machine Learning & Bio-Data Pipelines",
-    issuer: "DATA SCIENCE & ML",
-    badge: "ML FOR LIFE SCIENCES",
-    description:
-      "Expertise in multi-cohort feature selection, consensus modeling, validation techniques (LOOCV), and genomic variant inference.",
-  },
-];
+const singleCertification = {
+  title: "AI Fluency Framework & Foundations",
+  issuer: "VERIFIED CREDENTIAL // SKILLJAR",
+  badge: "AI & PROMPT ENGINEERING",
+  url: "https://verify.skilljar.com/c/ooi733esyygd",
+  description:
+    "Comprehensive certification validating core competencies in modern AI frameworks, prompt engineering architectures, LLM foundations, and applied agentic workflows.",
+};
 
 const achievements = [
   {
-    title: "AgriThon Hackathon 2025 Finalist / Contributor",
-    meta: "HACKATHON 2025 // COMPUTER VISION",
-    badge: "TOP CONTENDER",
+    title: "Toastmasters International 'Triple Crown' Award",
+    meta: "TOASTMASTERS INTERNATIONAL // 2025—26",
+    badge: "TRIPLE CROWN",
     description:
-      "Co-developed PhytoScan, an end-to-end edge AI plant disease diagnostic pipeline leveraging YOLOv8 and ResNet with custom CVAT annotation.",
+      "Secured the prestigious Triple Crown award during my tenure in Toastmasters (2025–26), recognizing milestone achievements in speech delivery, executive communication, and educational pathways.",
   },
   {
-    title: "Top-Tier Academic Standing (8.82 CGPA)",
-    meta: "VIT VELLORE // 2023—2027",
-    badge: "EXCELLENCE",
+    title: "Branch Merit List & Cash Prize (First Year)",
+    meta: "VIT VELLORE // 1ST YEAR MERIT",
+    badge: "9.42 GPA",
     description:
-      "Consistent academic excellence across rigorous Computer Science Engineering and Computational Biology coursework.",
-  },
-  {
-    title: "Research Traineeship at BRIC-RGCB",
-    meta: "NATIONAL BIOTECH LAB // 2025",
-    badge: "RESEARCH",
-    description:
-      "Successfully developed automated MD trajectory analysis pipelines for HIV-1 protease and nicotinic acetylcholine receptor complexes.",
+      "Placed on the branch merit list in my first year after securing a 9.42 GPA in the first semester, receiving an official certificate of merit and a cash prize for academic distinction.",
   },
 ];
 
@@ -229,6 +206,37 @@ const toastmastersData = {
     "Meeting Facilitation",
   ],
 };
+
+const interestTiles = [
+  {
+    kicker: "CLADISTICS & DEEP TIME",
+    title: "Evolutionary Biology & Phylogenetics",
+    icon: Dna,
+    description:
+      "Endlessly fascinated by the tree of life, morphological transitions, and phylogenetic reconstruction. I love exploring how evolutionary mechanisms sculpt biological complexity across deep time.",
+  },
+  {
+    kicker: "LITERATURE & WORLDBUILDING",
+    title: "Fiction, Non-Fiction & Speculative Evolution",
+    icon: BookOpen,
+    description:
+      "An avid reader of both fiction and non-fiction. I dabble heavily in speculative evolution thought experiments and am a huge fan of C. M. Kosemen's All Tomorrows and speculative biology worldbuilding.",
+  },
+  {
+    kicker: "COLLECTIVE INTELLIGENCE",
+    title: "Swarm Biology & Emergent Algorithms",
+    icon: Cpu,
+    description:
+      "Deeply interested in social insect biology (ants, bees, termites) and how decentralized, stigmergic communication in nature translates into computational swarm intelligence, routing algorithms, and distributed systems.",
+  },
+  {
+    kicker: "FIELD PURSUITS & ANALOG CHANNELS",
+    title: "Swimming, Birdwatching & Deep Dives",
+    icon: Compass,
+    description:
+      "Recharging through long-distance swimming, field birdwatching with binoculars, and falling down late-night Wikipedia rabbit holes tracing obscure historical genealogies and scientific breakthroughs.",
+  },
+];
 
 export default function Home() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -249,9 +257,10 @@ export default function Home() {
           <a href="#experience" onClick={closeMobile}>03 / EXPERIENCE</a>
           <a href="#education" onClick={closeMobile}>04 / EDUCATION</a>
           <a href="#skills" onClick={closeMobile}>05 / SKILLS</a>
-          <a href="#certifications" onClick={closeMobile}>06 / CERTS & LOGS</a>
+          <a href="#certifications" onClick={closeMobile}>06 / CERTS & AWARDS</a>
           <a href="#leadership" onClick={closeMobile}>07 / LEADERSHIP</a>
-          <a href="#contact" onClick={closeMobile}>08 / CONTACT</a>
+          <a href="#interests" onClick={closeMobile}>08 / CURIOSITIES</a>
+          <a href="#contact" onClick={closeMobile}>09 / CONTACT</a>
         </nav>
         <div className="system-status"><CircleDot size={11} /> AVAILABLE FOR SIGNALS</div>
       </header>
@@ -267,9 +276,10 @@ export default function Home() {
             <a href="#experience"><span>03</span> EXPERIENCE</a>
             <a href="#education"><span>04</span> EDUCATION</a>
             <a href="#skills"><span>05</span> SKILLS</a>
-            <a href="#certifications"><span>06</span> CERTS & ACHIEVEMENTS</a>
+            <a href="#certifications"><span>06</span> CERTS & AWARDS</a>
             <a href="#leadership"><span>07</span> LEADERSHIP</a>
-            <a href="#contact"><span>08</span> TRANSMIT</a>
+            <a href="#interests"><span>08</span> CURIOSITIES</a>
+            <a href="#contact"><span>09</span> TRANSMIT</a>
           </nav>
           <div className="rail-footer">VIT VELLORE / CS-BIO<br />THIRUVANANTHAPURAM → VELLORE</div>
         </aside>
@@ -310,7 +320,7 @@ export default function Home() {
                   I’m a final-year <strong>Computer Science Engineering (Bioinformatics)</strong> undergraduate at <strong>Vellore Institute of Technology (VIT)</strong>. While I love computational biology, I approach it first and foremost as a software engineer: writing clean, modular code, setting up resilient test suites, leveraging cloud architectures, and applying AI to noisy data.
                 </p>
                 <p>
-                  My toolkit ranges from general-purpose languages like <strong>Java, Python, C++, and Bash</strong> to cloud & DevOps tools like <strong>AWS Lambda, Docker, and Git</strong>. Whether migrating enterprise test suites to Playwright at <strong>Thermo Fisher Scientific</strong>, automating molecular dynamics pipelines at <strong>BRIC-RGCB</strong>, or tinkering with <strong>embedded systems & IoT</strong>, I love building systems that just work.
+                  My toolkit ranges from general-purpose languages like <strong>Java, Python, C++, and Bash</strong> to cloud & DevOps tools like <strong>AWS Lambda, Docker, and Git</strong>. Whether migrating enterprise test suites to Playwright at <strong>Thermo Fisher Scientific</strong>, automating molecular dynamics pipelines at <strong>BRIC-RGCB</strong>, or training machine learning models, I love building systems that just work.
                 </p>
                 <p>
                   Beyond engineering, serving as Vice President Membership at <strong>SOL Toastmasters Club</strong> taught me that great software requires great communication. I love collaborating with curious teams to solve hard problems with clear questions and reproducible code.
@@ -323,7 +333,7 @@ export default function Home() {
               <b>MACHINE LEARNING</b><i>×</i>
               <b>TEST AUTOMATION</b><i>×</i>
               <b>COMPUTATIONAL BIOLOGY</b><i>×</i>
-              <b>EMBEDDED SYSTEMS</b>
+              <b>CLOUD & DEVOPS</b>
             </div>
           </section>
 
@@ -424,7 +434,7 @@ export default function Home() {
                       <span className="education-tag">{edu.score}</span>
                     </div>
                     <div style={{ color: "#f2b84b", fontFamily: "'Space Mono', monospace", fontSize: "11px", marginBottom: "8px" }}>
-                      {edu.degree} — <span style={{ color: "#d5e0c7" }}>{edu.specialization}</span>
+                      {edu.degree} {edu.specialization ? <>— <span style={{ color: "#d5e0c7" }}>{edu.specialization}</span></> : null}
                     </div>
                     <p>{edu.description}</p>
                   </div>
@@ -459,36 +469,45 @@ export default function Home() {
           <section className="certifications-section" id="certifications">
             <div className="section-header">
               <div>
-                <div className="section-tag">06 / VERIFIED CREDENTIALS</div>
-                <h2>Certifications & <em>milestones.</em></h2>
+                <div className="section-tag">06 / VERIFIED CREDENTIALS & AWARDS</div>
+                <h2>Certifications & <em>achievements.</em></h2>
               </div>
-              <span className="section-caption">PROFESSIONAL ACCREDITATIONS & HONORS</span>
+              <span className="section-caption">VERIFIED ACCREDITATIONS & HONORS</span>
             </div>
             
-            <div style={{ marginBottom: "40px" }}>
-              <div className="micro-label" style={{ color: "#f2b84b", marginBottom: "20px" }}>TECHNICAL CERTIFICATIONS</div>
-              <div className="cards-grid-3">
-                {certifications.map((cert, i) => (
-                  <div className="cert-card" key={i}>
-                    <div className="cert-card-header">
-                      <Award size={18} color="#f2b84b" />
-                      <span className="cert-badge">{cert.badge}</span>
-                    </div>
-                    <h3>{cert.title}</h3>
-                    <p>{cert.description}</p>
-                    <div className="cert-issuer">{cert.issuer}</div>
-                  </div>
-                ))}
+            {/* 1. Single AI Fluency Certification */}
+            <div style={{ marginBottom: "50px" }}>
+              <div className="micro-label" style={{ color: "#f2b84b", marginBottom: "20px" }}>VERIFIED CERTIFICATION</div>
+              <div className="cert-single-box">
+                <div className="cert-card-header" style={{ marginBottom: "4px" }}>
+                  <Award size={22} color="#f2b84b" />
+                  <span className="cert-badge">{singleCertification.badge}</span>
+                </div>
+                <h3>{singleCertification.title}</h3>
+                <p>{singleCertification.description}</p>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "16px", marginTop: "8px" }}>
+                  <span className="cert-issuer">{singleCertification.issuer}</span>
+                  <a
+                    href={singleCertification.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cert-verify-link"
+                    aria-label="Verify AI Fluency certification on Skilljar"
+                  >
+                    VERIFY CREDENTIAL <ExternalLink size={13} />
+                  </a>
+                </div>
               </div>
             </div>
 
-            <div>
-              <div className="micro-label" style={{ color: "#f2b84b", marginBottom: "20px" }}>KEY ACHIEVEMENTS & CONTRIBUTIONS</div>
-              <div className="cards-grid-3">
+            {/* 2. Key Achievements */}
+            <div id="achievements">
+              <div className="micro-label" style={{ color: "#f2b84b", marginBottom: "20px" }}>KEY HONORS & AWARDS</div>
+              <div className="cards-grid-2">
                 {achievements.map((ach, i) => (
                   <div className="achievement-card" key={i}>
                     <div className="achievement-card-header">
-                      <Trophy size={18} color="#f2b84b" />
+                      <Trophy size={20} color="#f2b84b" />
                       <span className="cert-badge" style={{ color: "#f2b84b", borderColor: "#554422" }}>{ach.badge}</span>
                     </div>
                     <h3>{ach.title}</h3>
@@ -528,10 +547,36 @@ export default function Home() {
             </div>
           </section>
 
-          {/* 08 / CONTACT */}
+          {/* 08 / HOBBIES & INTERESTS */}
+          <section className="interests-section" id="interests">
+            <div className="section-header">
+              <div>
+                <div className="section-tag">08 / CURIOSITIES & PURSUITS</div>
+                <h2>Beyond the <em>terminal.</em></h2>
+              </div>
+              <span className="section-caption">EVOLUTIONARY BIOLOGY, LITERATURE & FIELD PURSUITS</span>
+            </div>
+            <div className="interests-grid">
+              {interestTiles.map((tile, i) => {
+                const Icon = tile.icon;
+                return (
+                  <div className="interest-tile" key={i}>
+                    <div className="interest-tile-top">
+                      <span className="interest-tile-kicker">{tile.kicker}</span>
+                      <Icon size={18} color="#f2b84b" />
+                    </div>
+                    <h3>{tile.title}</h3>
+                    <p>{tile.description}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+
+          {/* 09 / CONTACT */}
           <section className="contact-section" id="contact">
             <div className="contact-top">
-              <div className="section-tag">08 / OPEN CHANNEL</div>
+              <div className="section-tag">09 / OPEN CHANNEL</div>
               <ShieldAlert size={22} />
             </div>
             <h2>Have a project or<br />role worth <em>talking about?</em></h2>
@@ -582,4 +627,5 @@ export default function Home() {
     </div>
   );
 }
+
 
