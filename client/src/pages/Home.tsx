@@ -28,53 +28,8 @@ import {
   Users,
   X,
 } from "lucide-react";
+import { ProjectsSection } from "@/components/projects/ProjectsSection";
 
-const projects = [
-  {
-    id: "PX-01",
-    title: "Parkinson's Disease Multi-Dataset Transcriptomics",
-    kicker: "TRANSCRIPTOMICS / CONSENSUS FEATURE ENGINEERING",
-    description:
-      "A production-grade biomarker discovery pipeline integrating five feature-selection methods with machine learning classifiers. Identifies 12 consensus biomarkers across multi-cohort RNA-seq datasets, validated through LOOCV and SHAP interpretability.",
-    stack: ["Python", "R", "limma", "edgeR", "Scikit-learn", "SHAP"],
-    image: "/images/fossil-signal-genomics.svg",
-    metric: "12 consensus biomarkers",
-    github: "https://github.com/Bondae1103/PD-DEG-MultipleML-Analyses",
-  },
-  {
-    id: "PX-02",
-    title: "Serverless Genomic Variant Classifier (TB-Classifier)",
-    kicker: "ANTIBIOTIC RESISTANCE / AWS LAMBDA & DOCKER",
-    description:
-      "A containerized Random Forest inference pipeline running on AWS Lambda with S3 event triggers to predict drug-resistance profiles from M. tuberculosis genomic VCF files in real time. Built with Docker and cyvcf2 for scalable serverless execution.",
-    stack: ["Python", "AWS Lambda", "S3", "Docker", "cyvcf2", "Random Forest"],
-    image: "/images/fossil-signal-variant.svg",
-    metric: "82% model accuracy",
-    github: "https://github.com/Bondae1103/TB-Classifier",
-  },
-  {
-    id: "PX-03",
-    title: "PhytoScan",
-    kicker: "PLANT HEALTH / COMPUTER VISION & EDGE AI",
-    description:
-      "An end-to-end plant pathology detection pipeline developed for the AgriThon Hackathon 2025. Combines CVAT dataset annotation, automated image preprocessing, and custom YOLOv8/ResNet models for real-time edge diagnostic inference in agriculture.",
-    stack: ["Python", "YOLOv8", "ResNet", "OpenCV", "CVAT", "PyTorch"],
-    image: "/images/fossil-signal-vision.svg",
-    metric: "78% validation accuracy",
-    github: "https://github.com/Mo-Kash/PhytoScan",
-  },
-  {
-    id: "PX-04",
-    title: "MD Simulation Analyses using Bio3D in R",
-    kicker: "MOLECULAR DYNAMICS / AUTOMATION & R",
-    description:
-      "A modular Bash and R automation suite for high-throughput trajectory parsing from GROMACS runs. Computes RMSD, RMSF, dynamic cross-correlation matrices (DCCM), and radius of gyration to evaluate HIV-1 protease and receptor-ligand stability.",
-    stack: ["R", "Bio3D", "GROMACS", "Bash", "Linux", "PyMOL"],
-    image: "/images/fossil-signal-md.svg",
-    metric: "4 trajectory metrics",
-    github: "https://github.com/Bondae1103/ligand-analyses",
-  },
-];
 
 const skillGroups = [
   {
@@ -337,52 +292,8 @@ export default function Home() {
             </div>
           </section>
 
-          {/* 02 / PROJECTS */}
-          <section className="work-section" id="work">
-            <div className="section-header">
-              <div>
-                <div className="section-tag">02 / EVIDENCE LOG</div>
-                <h2>Selected <em>work.</em></h2>
-              </div>
-              <span className="section-caption">04 CODE REPOSITORIES // 2024—26</span>
-            </div>
-            <div className="projects-list">
-              {projects.map((project, index) => (
-                <article className="project-card" key={project.id}>
-                  <div className="project-index">
-                    {project.id}
-                    <span>0{index + 1}</span>
-                  </div>
-                  <div className="project-image">
-                    <img src={project.image} alt={project.title} />
-                    <div className="image-scan" />
-                  </div>
-                  <div className="project-content">
-                    <div className="project-kicker">{project.kicker}</div>
-                    <h3>{project.title}</h3>
-                    <p>{project.description}</p>
-                    <div className="stack-list">
-                      {project.stack.map((item) => (
-                        <span key={item}>{item}</span>
-                      ))}
-                    </div>
-                    <div className="project-bottom">
-                      <b>{project.metric}</b>
-                      <a
-                        className="github-action"
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`View ${project.title} on GitHub`}
-                      >
-                        <Github size={13} /> VIEW ON GITHUB <ArrowUpRight size={13} />
-                      </a>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
+          {/* 02 / PROJECTS (Paginated Menu-Style Console) */}
+          <ProjectsSection />
 
           {/* 03 / EXPERIENCE */}
           <section className="log-section" id="experience">
