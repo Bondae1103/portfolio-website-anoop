@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { ArrowUpRight, Github, Sparkles } from "lucide-react";
 import type { Project } from "@/lib/projectPagination";
 import { animateMetric, cardItemVariants } from "@/lib/animations";
@@ -17,17 +17,22 @@ export function ProjectCard({
   isFirstOnPageOne = false,
   isPageOne = true,
 }: ProjectCardProps) {
+  const cardRef = useRef<HTMLElement>(null);
   const metricRef = useRef<HTMLElement>(null);
+  const isInView = useInView(cardRef, { once: true, margin: "-40px" });
   const isSpecimenPlot = project.image.includes("/images/projects/");
 
   useEffect(() => {
-    animateMetric(metricRef.current, project.metric);
-  }, [project.id, project.metric]);
+    if (isInView) {
+      animateMetric(metricRef.current, project.metric);
+    }
+  }, [isInView, project.id, project.metric]);
 
   const paddedIndex = String(displayIndex + 1).padStart(2, "0");
 
   return (
     <motion.article
+      ref={cardRef}
       variants={cardItemVariants}
       className={`project-card ${project.starred ? "is-starred" : ""}`}
       id={project.id}

@@ -28,6 +28,7 @@ import {
   Users,
   X,
 } from "lucide-react";
+import { motion } from "framer-motion";
 import { ProjectsSection } from "@/components/projects/ProjectsSection";
 
 
@@ -242,7 +243,12 @@ export default function Home() {
         <main>
           {/* HERO SECTION */}
           <section className="hero-section">
-            <div className="hero-copy">
+            <motion.div
+              className="hero-copy"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+            >
               <div className="eyebrow"><ScanLine size={14} /> FIELD NOTE 00 — SOFTWARE & BIOSYSTEMS</div>
               <h1>Engineering code,<br />cloud & <em>biological</em><br />systems.</h1>
               <p className="hero-intro">
@@ -252,19 +258,30 @@ export default function Home() {
                 <a className="primary-action" href="#work">VIEW SELECTED WORK <ChevronRight size={17} /></a>
                 <a className="text-action" href="https://github.com/Bondae1103" target="_blank" rel="noopener noreferrer">GITHUB REPOS <Github size={15} /></a>
               </div>
-            </div>
-            <div className="hero-art">
+            </motion.div>
+            <motion.div
+              className="hero-art"
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+            >
               <img src="/images/fossil-signal-hero.svg" alt="Amber-lit computational biology research console" />
               <div className="hero-overlay-label top">SPECIMEN / AN-001<br /><span>BIOSYSTEMS & SOFTWARE CONSOLE</span></div>
               <div className="hero-overlay-label bottom"><span className="pulse-dot" /> SIGNAL LOCKED<br /><span>LAT 08.52° N / LONG 76.94° E</span></div>
-            </div>
+            </motion.div>
             <div className="hero-footnote">SCROLL TO INVESTIGATE <span>↓</span></div>
           </section>
 
           {/* 01 / ABOUT */}
           <section className="intel-band" id="about">
             <div className="section-tag">01 / SUBJECT PROFILE</div>
-            <div className="intel-grid">
+            <motion.div
+              className="intel-grid"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.45, ease: "easeOut" }}
+            >
               <div className="section-heading">
                 <span className="micro-label">CURRENT POSITION</span>
                 <h2>Between the<br /><em>lab & the stack.</em></h2>
@@ -281,7 +298,7 @@ export default function Home() {
                   Beyond engineering, serving as Vice President Membership at <strong>SOL Toastmasters Club</strong> taught me that great software requires great communication. I love collaborating with curious teams to solve hard problems with clear questions and reproducible code.
                 </p>
               </div>
-            </div>
+            </motion.div>
             <div className="interest-strip">
               <span>TECH VECTORS</span>
               <b>SOFTWARE ENGINEERING</b><i>×</i>
@@ -305,7 +322,14 @@ export default function Home() {
               </div>
               <div className="timeline">
                 {experiences.map((exp, i) => (
-                  <div className="timeline-entry" key={i}>
+                  <motion.div
+                    className="timeline-entry"
+                    key={i}
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-30px" }}
+                    transition={{ duration: 0.35, delay: i * 0.08 }}
+                  >
                     <div className="timeline-date">
                       {exp.period}
                       <br />
@@ -320,7 +344,7 @@ export default function Home() {
                         ))}
                       </ul>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
@@ -336,7 +360,14 @@ export default function Home() {
               </div>
               <div className="education-cards">
                 {educationList.map((edu, idx) => (
-                  <div className="education-card" key={idx}>
+                  <motion.div
+                    className="education-card"
+                    key={idx}
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-30px" }}
+                    transition={{ duration: 0.35, delay: idx * 0.08 }}
+                  >
                     <div className="education-card-top">
                       <div>
                         <h3>{edu.institution}</h3>
@@ -348,7 +379,7 @@ export default function Home() {
                       {edu.degree} {edu.specialization ? <>— <span style={{ color: "#d5e0c7" }}>{edu.specialization}</span></> : null}
                     </div>
                     <p>{edu.description}</p>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
@@ -364,14 +395,21 @@ export default function Home() {
               <span className="section-caption">MODERN SOFTWARE & SCIENTIFIC ARSENAL</span>
             </div>
             <div className="skills-grid">
-              {skillGroups.map(({ label, icon: Icon, items }) => (
-                <div className="skill-card" key={label}>
+              {skillGroups.map(({ label, icon: Icon, items }, idx) => (
+                <motion.div
+                  className="skill-card"
+                  key={label}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-20px" }}
+                  transition={{ duration: 0.3, delay: idx * 0.06 }}
+                >
                   <Icon size={22} />
                   <div>
                     <h3>{label}</h3>
                     <p>{items}</p>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </section>
@@ -389,7 +427,13 @@ export default function Home() {
             {/* 1. Single AI Fluency Certification */}
             <div style={{ marginBottom: "50px" }}>
               <div className="micro-label" style={{ color: "#f2b84b", marginBottom: "20px" }}>VERIFIED CERTIFICATION</div>
-              <div className="cert-single-box">
+              <motion.div
+                className="cert-single-box"
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-30px" }}
+                transition={{ duration: 0.4 }}
+              >
                 <div className="cert-card-header" style={{ marginBottom: "4px" }}>
                   <Award size={22} color="#f2b84b" />
                   <span className="cert-badge">{singleCertification.badge}</span>
@@ -408,7 +452,7 @@ export default function Home() {
                     VERIFY CREDENTIAL <ExternalLink size={13} />
                   </a>
                 </div>
-              </div>
+              </motion.div>
             </div>
 
             {/* 2. Key Achievements */}
@@ -416,7 +460,14 @@ export default function Home() {
               <div className="micro-label" style={{ color: "#f2b84b", marginBottom: "20px" }}>KEY HONORS & AWARDS</div>
               <div className="cards-grid-2">
                 {achievements.map((ach, i) => (
-                  <div className="achievement-card" key={i}>
+                  <motion.div
+                    className="achievement-card"
+                    key={i}
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-30px" }}
+                    transition={{ duration: 0.35, delay: i * 0.08 }}
+                  >
                     <div className="achievement-card-header">
                       <Trophy size={20} color="#f2b84b" />
                       <span className="cert-badge" style={{ color: "#f2b84b", borderColor: "#554422" }}>{ach.badge}</span>
@@ -424,7 +475,7 @@ export default function Home() {
                     <h3>{ach.title}</h3>
                     <p>{ach.description}</p>
                     <div className="achievement-meta">{ach.meta}</div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
@@ -439,7 +490,13 @@ export default function Home() {
                 <p>Developing executive presence, impromptu communication, and community leadership.</p>
               </div>
               <div>
-                <div className="club-feature">
+                <motion.div
+                  className="club-feature"
+                  initial={{ opacity: 0, y: 14 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-30px" }}
+                  transition={{ duration: 0.4 }}
+                >
                   <div className="club-role-chip">
                     <Users size={14} /> {toastmastersData.role}
                   </div>
@@ -453,7 +510,7 @@ export default function Home() {
                       <span key={s}>{s}</span>
                     ))}
                   </div>
-                </div>
+                </motion.div>
               </div>
             </div>
           </section>
@@ -471,14 +528,21 @@ export default function Home() {
               {interestTiles.map((tile, i) => {
                 const Icon = tile.icon;
                 return (
-                  <div className="interest-tile" key={i}>
+                  <motion.div
+                    className="interest-tile"
+                    key={i}
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-20px" }}
+                    transition={{ duration: 0.3, delay: i * 0.06 }}
+                  >
                     <div className="interest-tile-top">
                       <span className="interest-tile-kicker">{tile.kicker}</span>
                       <Icon size={18} color="#f2b84b" />
                     </div>
                     <h3>{tile.title}</h3>
                     <p>{tile.description}</p>
-                  </div>
+                  </motion.div>
                 );
               })}
             </div>
