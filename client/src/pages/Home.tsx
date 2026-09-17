@@ -1,4 +1,4 @@
-/* Fossil Signal page: industrial retrofuturism, amber signal accents, evidence-led storytelling, and an approachable software-first portfolio console. */
+/* Fossil Signal page: warm charcoal surfaces, golden-amber signal accents, evidence-led storytelling, and an approachable software-first portfolio console. */
 import { useState } from "react";
 import {
   ArrowUpRight,
@@ -13,6 +13,7 @@ import {
   Database,
   Dna,
   ExternalLink,
+  Gamepad2,
   Github,
   GraduationCap,
   Linkedin,
@@ -28,30 +29,101 @@ import {
   Users,
   X,
 } from "lucide-react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { ProjectsSection } from "@/components/projects/ProjectsSection";
 
+const skillCategories = [
+  { id: "all", label: "ALL CAPABILITIES [12]" },
+  { id: "swe", label: "SOFTWARE & SYSTEMS [4]" },
+  { id: "ai", label: "DATA SCIENCE & AI [3]" },
+  { id: "cloud", label: "CLOUD & QA [2]" },
+  { id: "bio", label: "BIOSYSTEMS & SCIENTIFIC [3]" },
+];
 
 const skillGroups = [
   {
-    label: "LANGUAGES & CORE",
+    category: "swe",
+    label: "PROGRAMMING LANGUAGES",
     icon: Code2,
-    items: "Python · Java · C/C++ · R · SQL · Bash · JavaScript / TypeScript",
+    tag: "POLYGLOT CORE",
+    items: "Python · Java · C/C++ · TypeScript · JavaScript · SQL · Bash / Shell · R",
   },
   {
-    label: "SOFTWARE ENGINEERING & TESTING",
+    category: "swe",
+    label: "SOFTWARE ENGINEERING",
+    icon: Cpu,
+    tag: "SYSTEM DESIGN",
+    items: "OOP/OOD (SOLID) · Data Structures & Algorithms · Modular Architecture · Design Patterns · Clean Code · Complexity Analysis",
+  },
+  {
+    category: "swe",
+    label: "BACKEND & DISTRIBUTED SYSTEMS",
     icon: Terminal,
-    items: "Playwright · Selenium · AWS (Lambda, S3) · Docker · Git · CI/CD · REST APIs · Linux",
+    tag: "MICROSERVICES",
+    items: "FastAPI · Express.js · RESTful APIs · Server-Sent Events (SSE) · Celery (Distributed Tasks) · Microservices Architecture",
   },
   {
-    label: "MACHINE LEARNING & AI",
+    category: "ai",
+    label: "DATA SCIENCE & ANALYTICS",
+    icon: Compass,
+    tag: "STATISTICAL RIGOR",
+    items: "Pandas · NumPy · SciPy · Scikit-learn · Statistical Modeling · Feature Selection (LASSO, Boruta, SVM-RFE) · SHAP · LOOCV",
+  },
+  {
+    category: "ai",
+    label: "AI & MACHINE LEARNING",
     icon: Atom,
-    items: "Scikit-learn · XGBoost · Random Forest · YOLOv8 · ResNet · SHAP · Prompt Engineering · Agentic AI (Codex)",
+    tag: "DEEP LEARNING & CV",
+    items: "PyTorch · PyG (Graph Neural Networks) · YOLOv8 · ResNet · OpenCV · Transformers (PubMedBERT) · XGBoost · Random Forest · Agentic AI (OpenAI Codex)",
   },
   {
-    label: "COMPUTATIONAL BIOLOGY",
+    category: "swe",
+    label: "DATABASES & VECTOR STORES",
+    icon: Database,
+    tag: "STORAGE & EMBEDDINGS",
+    items: "PostgreSQL · MySQL · Redis (In-Memory Cache & Message Broker) · Qdrant (Vector Database) · Schema Design · SQL Optimization",
+  },
+  {
+    category: "cloud",
+    label: "CLOUD & DEVOPS",
+    icon: Sparkles,
+    tag: "CONTAINERS & CLOUD",
+    items: "AWS (Lambda, S3) · Docker · Docker Compose · Git · GitHub Actions · CI/CD Pipelines · Linux/POSIX Environments",
+  },
+  {
+    category: "cloud",
+    label: "TESTING & AUTOMATION",
+    icon: ShieldAlert,
+    tag: "QUALITY ENGINEERING",
+    items: "Playwright · Pytest · Selenium · Vitest · Test-Driven Development (TDD) · BDD (Gherkin) · Mock Fixtures · Headed/Headless QA",
+  },
+  {
+    category: "swe",
+    label: "WEB DEVELOPMENT",
+    icon: BookOpen,
+    tag: "FRONTEND ARSENAL",
+    items: "React 19 · TypeScript · Vite · Tailwind CSS · Zod · Radix UI · Responsive UI Architecture",
+  },
+  {
+    category: "bio",
+    label: "BIOINFORMATICS & GENOMICS",
     icon: Dna,
-    items: "GROMACS · AutoDock · Bio3D · PyMOL · VMD · Chimera · cyvcf2 · edgeR · limma · CHARMM-GUI",
+    tag: "GENOMIC PIPELINES",
+    items: "cyvcf2 (VCF Parsing) · RNA-seq / Transcriptomics · Differential Expression (limma, edgeR) · Biomarker Discovery · NCBI / BLAST",
+  },
+  {
+    category: "bio",
+    label: "SCIENTIFIC COMPUTING & BIOPHYSICS",
+    icon: Microscope,
+    tag: "MOLECULAR DYNAMICS",
+    items: "Molecular Dynamics (GROMACS, Bio3D) · Molecular Docking (AutoDock Vina) · VMD · PyMOL · UCSF Chimera · CHARMM-GUI · PCA Trajectories",
+  },
+  {
+    category: "ai",
+    label: "DEVELOPER TOOLS & VISUALIZATION",
+    icon: ScanLine,
+    tag: "DATA VISUALIZATION",
+    items: "Git · VS Code · CVAT (Annotation) · Postman · Linux Shell · Matplotlib · Seaborn · Tableau · Recharts",
   },
 ];
 
@@ -165,6 +237,13 @@ const toastmastersData = {
 
 const interestTiles = [
   {
+    kicker: "STRATEGY & TACTICAL DEPTH",
+    title: "High-Skill Gaming & Worldbuilding",
+    icon: Gamepad2,
+    description:
+      "Immersed in high-skill tactical execution, complex worldbuilding, and real-time decision making. Whether mastering stamina management, spatial awareness, and boss choreography in Elden Ring, executing fast-paced squad coordination and movement mechanics in Apex Legends, navigating chaotic frontline horde control in Warhammer: Vermintide 2, or drilling macro-mechanics, build orders, and multi-tasking in StarCraft.",
+  },
+  {
     kicker: "CLADISTICS & DEEP TIME",
     title: "Evolutionary Biology & Phylogenetics",
     icon: Dna,
@@ -172,18 +251,18 @@ const interestTiles = [
       "Endlessly fascinated by the tree of life, morphological transitions, and phylogenetic reconstruction. I love exploring how evolutionary mechanisms sculpt biological complexity across deep time.",
   },
   {
-    kicker: "LITERATURE & WORLDBUILDING",
-    title: "Fiction, Non-Fiction & Speculative Evolution",
-    icon: BookOpen,
-    description:
-      "An avid reader of both fiction and non-fiction. I dabble heavily in speculative evolution thought experiments and am a huge fan of C. M. Kosemen's All Tomorrows and speculative biology worldbuilding.",
-  },
-  {
     kicker: "COLLECTIVE INTELLIGENCE",
     title: "Swarm Biology & Emergent Algorithms",
     icon: Cpu,
     description:
       "Deeply interested in social insect biology (ants, bees, termites) and how decentralized, stigmergic communication in nature translates into computational swarm intelligence, routing algorithms, and distributed systems.",
+  },
+  {
+    kicker: "LITERATURE & WORLDBUILDING",
+    title: "Fiction, Non-Fiction & Speculative Evolution",
+    icon: BookOpen,
+    description:
+      "An avid reader of both fiction and non-fiction. I dabble heavily in speculative evolution thought experiments and am a huge fan of C. M. Kosemen's All Tomorrows and speculative biology worldbuilding.",
   },
   {
     kicker: "FIELD PURSUITS & ANALOG CHANNELS",
@@ -196,7 +275,13 @@ const interestTiles = [
 
 export default function Home() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [selectedSkillCategory, setSelectedSkillCategory] = useState("all");
+
   const closeMobile = () => setMobileOpen(false);
+
+  const filteredSkills = skillGroups.filter(
+    (s) => selectedSkillCategory === "all" || s.category === selectedSkillCategory
+  );
 
   return (
     <div className="site-shell">
@@ -245,14 +330,14 @@ export default function Home() {
           <section className="hero-section">
             <motion.div
               className="hero-copy"
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
+              transition={{ duration: 0.55, ease: "easeOut" }}
             >
-              <div className="eyebrow"><ScanLine size={14} /> FIELD NOTE 00 — SOFTWARE & BIOSYSTEMS</div>
-              <h1>Engineering code,<br />cloud & <em>biological</em><br />systems.</h1>
+              <div className="eyebrow"><ScanLine size={14} /> FIELD NOTE 00 — SOFTWARE, INTELLIGENCE & BIOSYSTEMS</div>
+              <h1>Engineering code,<br />intelligence & <em>biological</em><br />systems.</h1>
               <p className="hero-intro">
-                Hey, I’m <strong>Anoop Nair</strong> — a Computer Science Engineering student at <strong>VIT Vellore</strong>. I take problems from messy, raw data all the way to robust, working software — whether that’s containerized cloud inference on AWS, automated QA with Playwright, or machine learning for genomics.
+                Hey, I’m <strong>Anoop Nair</strong> — a Software Engineer &amp; Data-Oriented Developer completing Computer Science Engineering at <strong>VIT Vellore</strong>. I take problems from messy, high-dimensional data all the way to robust, working software — whether that’s distributed RAG microservices, containerized cloud inference on AWS, automated QA with Playwright, or machine learning for complex biosystems.
               </p>
               <div className="hero-actions">
                 <a className="primary-action" href="#work">VIEW SELECTED WORK <ChevronRight size={17} /></a>
@@ -261,12 +346,12 @@ export default function Home() {
             </motion.div>
             <motion.div
               className="hero-art"
-              initial={{ opacity: 0, scale: 0.98 }}
+              initial={{ opacity: 0, scale: 0.97 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+              transition={{ duration: 0.65, delay: 0.1, ease: "easeOut" }}
             >
-              <img src="/images/fossil-signal-hero.svg" alt="Amber-lit computational biology research console" />
-              <div className="hero-overlay-label top">SPECIMEN / AN-001<br /><span>BIOSYSTEMS & SOFTWARE CONSOLE</span></div>
+              <img src="/images/fossil-signal-hero.svg" alt="Golden-amber research console visualization" />
+              <div className="hero-overlay-label top">SPECIMEN / AN-001<br /><span>SOFTWARE &amp; BIOSYSTEMS CONSOLE</span></div>
               <div className="hero-overlay-label bottom"><span className="pulse-dot" /> SIGNAL LOCKED<br /><span>LAT 08.52° N / LONG 76.94° E</span></div>
             </motion.div>
             <div className="hero-footnote">SCROLL TO INVESTIGATE <span>↓</span></div>
@@ -277,10 +362,10 @@ export default function Home() {
             <div className="section-tag">01 / SUBJECT PROFILE</div>
             <motion.div
               className="intel-grid"
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.45, ease: "easeOut" }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
             >
               <div className="section-heading">
                 <span className="micro-label">CURRENT POSITION</span>
@@ -289,13 +374,13 @@ export default function Home() {
               </div>
               <div className="about-copy">
                 <p>
-                  I’m a final-year <strong>Computer Science Engineering (Bioinformatics)</strong> undergraduate at <strong>Vellore Institute of Technology (VIT)</strong>. While I love computational biology, I approach it first and foremost as a software engineer: writing clean, modular code, setting up resilient test suites, leveraging cloud architectures, and applying AI to noisy data.
+                  I’m a final-year <strong>Computer Science Engineering (Bioinformatics)</strong> undergraduate at <strong>Vellore Institute of Technology (VIT)</strong>. I approach engineering from a software-first foundation: building clean, modular backends, architecting resilient test suites, leveraging cloud microservices, and deploying applied AI to complex data.
                 </p>
                 <p>
-                  My toolkit ranges from general-purpose languages like <strong>Java, Python, C++, and Bash</strong> to cloud & DevOps tools like <strong>AWS Lambda, Docker, and Git</strong>. Whether migrating enterprise test suites to Playwright at <strong>Thermo Fisher Scientific</strong>, automating molecular dynamics pipelines at <strong>BRIC-RGCB</strong>, or training machine learning models, I love building systems that just work.
+                  My background in computational biology and high-dimensional genomics is what sharpens my edge as a software developer: having engineered pipelines for 13,000+ bacterial genomes and multi-cohort RNA-seq datasets, I treat data integrity, algorithmic efficiency, and test repeatability as core engineering imperatives. Whether developing distributed RAG pipelines with <strong>FastAPI, Celery, and Qdrant</strong>, migrating enterprise test automation to Playwright at <strong>Thermo Fisher Scientific</strong>, or automating molecular dynamics pipelines at <strong>BRIC-RGCB</strong>, I thrive on building reliable systems that just work.
                 </p>
                 <p>
-                  Beyond engineering, serving as Vice President Membership at <strong>SOL Toastmasters Club</strong> taught me that great software requires great communication. I love collaborating with curious teams to solve hard problems with clear questions and reproducible code.
+                  Beyond engineering, serving as Vice President Membership at <strong>SOL Toastmasters Club</strong> taught me that great software requires great communication. I love collaborating with curious, ambitious teams to solve hard problems with clear questions and reproducible code.
                 </p>
               </div>
             </motion.div>
@@ -385,32 +470,52 @@ export default function Home() {
             </div>
           </section>
 
-          {/* 05 / SKILLS */}
+          {/* 05 / SKILLS ARSENAL */}
           <section className="skills-section" id="skills">
             <div className="section-header">
               <div>
                 <div className="section-tag">05 / TOOLKIT & CAPABILITIES</div>
-                <h2>Technical <em>stack.</em></h2>
+                <h2>Technical <em>arsenal.</em></h2>
               </div>
-              <span className="section-caption">MODERN SOFTWARE & SCIENTIFIC ARSENAL</span>
+              <span className="section-caption">MODERN SOFTWARE & SCIENTIFIC SHOWCASE</span>
             </div>
-            <div className="skills-grid">
-              {skillGroups.map(({ label, icon: Icon, items }, idx) => (
-                <motion.div
-                  className="skill-card"
-                  key={label}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-20px" }}
-                  transition={{ duration: 0.3, delay: idx * 0.06 }}
+
+            {/* Interactive Channel Filters */}
+            <div className="skills-filter-bar">
+              {skillCategories.map((cat) => (
+                <button
+                  key={cat.id}
+                  className={`skill-filter-btn ${selectedSkillCategory === cat.id ? "is-active" : ""}`}
+                  onClick={() => setSelectedSkillCategory(cat.id)}
                 >
-                  <Icon size={22} />
-                  <div>
-                    <h3>{label}</h3>
-                    <p>{items}</p>
-                  </div>
-                </motion.div>
+                  {cat.label}
+                </button>
               ))}
+            </div>
+
+            <div className="skills-grid">
+              <AnimatePresence mode="popLayout">
+                {filteredSkills.map(({ label, icon: Icon, tag, items }, idx) => (
+                  <motion.div
+                    className="skill-card"
+                    key={label}
+                    layout
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.25, delay: idx * 0.025 }}
+                  >
+                    <Icon size={22} />
+                    <div>
+                      <h3>
+                        <span>{label}</span>
+                        <span style={{ fontSize: "8.5px", color: "#f5b738", fontWeight: 400, letterSpacing: "0.08em" }}>[{tag}]</span>
+                      </h3>
+                      <p>{items}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
             </div>
           </section>
 
@@ -522,7 +627,7 @@ export default function Home() {
                 <div className="section-tag">08 / CURIOSITIES & PURSUITS</div>
                 <h2>Beyond the <em>terminal.</em></h2>
               </div>
-              <span className="section-caption">EVOLUTIONARY BIOLOGY, LITERATURE & FIELD PURSUITS</span>
+              <span className="section-caption">TACTICAL GAMING, EVOLUTIONARY BIOLOGY &amp; FIELD PURSUITS</span>
             </div>
             <div className="interests-grid">
               {interestTiles.map((tile, i) => {
@@ -531,14 +636,14 @@ export default function Home() {
                   <motion.div
                     className="interest-tile"
                     key={i}
-                    initial={{ opacity: 0, y: 12 }}
+                    initial={{ opacity: 0, y: 16 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-20px" }}
-                    transition={{ duration: 0.3, delay: i * 0.06 }}
+                    transition={{ duration: 0.35, delay: i * 0.07 }}
                   >
                     <div className="interest-tile-top">
                       <span className="interest-tile-kicker">{tile.kicker}</span>
-                      <Icon size={18} color="#f2b84b" />
+                      <Icon size={18} color="#f5b738" />
                     </div>
                     <h3>{tile.title}</h3>
                     <p>{tile.description}</p>
@@ -556,7 +661,7 @@ export default function Home() {
             </div>
             <h2>Have a project or<br />role worth <em>talking about?</em></h2>
             <p>
-              Whether you’re working on healthcare AI, cloud test automation, computational biology research, or full-stack software engineering, transmit a message.
+              Whether you’re working on distributed systems, AI/ML engineering, cloud test automation, or computational biosystems research, transmit a message.
             </p>
             <a className="primary-action" href="mailto:anoop.nair.1103@gmail.com">
               CONTACT ANOOP <Mail size={16} />

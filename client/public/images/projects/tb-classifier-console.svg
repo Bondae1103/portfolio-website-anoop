@@ -1,0 +1,67 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="tb-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#191610" />
+      <stop offset="100%" stop-color="#12100a" />
+    </linearGradient>
+  </defs>
+
+  <rect width="600" height="400" fill="url(#tb-bg)" />
+  <rect x="15" y="15" width="570" height="370" fill="none" stroke="#3d3322" stroke-width="1" />
+
+  <!-- Header -->
+  <text x="35" y="45" font-family="'Space Mono', monospace" font-size="10" font-weight="700" fill="#f5b738" letter-spacing="1">VARIANT CLASSIFIER // AWS LAMBDA INFERENCE</text>
+  <text x="565" y="45" text-anchor="end" font-family="'Space Mono', monospace" font-size="9" fill="#9e9177">M. TUBERCULOSIS VCF</text>
+  <line x1="35" y1="58" x2="565" y2="58" stroke="#3d3322" stroke-width="1" />
+
+  <!-- VCF Variant Barcode Track -->
+  <g transform="translate(35, 80)">
+    <text x="0" y="0" font-family="'Space Mono', monospace" font-size="8.5" fill="#c4b89d">CHROMOSOME 1 : RESISTANCE MUTATIONS (SNPs/INDELs)</text>
+    <rect x="0" y="10" width="530" height="24" fill="#201a12" stroke="#4a3e28" />
+    <!-- SNP Markers in Amber and Gold -->
+    <rect x="45" y="10" width="4" height="24" fill="#f5b738" />
+    <rect x="88" y="10" width="3" height="24" fill="#ffd56b" />
+    <rect x="140" y="10" width="6" height="24" fill="#f5b738" />
+    <rect x="230" y="10" width="4" height="24" fill="#f5b738" />
+    <rect x="310" y="10" width="3" height="24" fill="#c48b4e" />
+    <rect x="420" y="10" width="5" height="24" fill="#f5b738" />
+    <rect x="490" y="10" width="4" height="24" fill="#ffd56b" />
+  </g>
+
+  <!-- Serverless Cloud Inference Pipeline Flow -->
+  <g transform="translate(35, 160)">
+    <!-- S3 Trigger -->
+    <rect x="0" y="0" width="140" height="90" fill="#1b1710" stroke="#4a3e28" />
+    <text x="12" y="24" font-family="'Space Mono', monospace" font-size="9" font-weight="700" fill="#f5b738">S3 BUCKET</text>
+    <text x="12" y="44" font-family="'Space Mono', monospace" font-size="8" fill="#c4b89d">Event: PutObject</text>
+    <text x="12" y="60" font-family="'Space Mono', monospace" font-size="7.5" fill="#8f846d">*.vcf.gz upload</text>
+    <text x="12" y="74" font-family="'Space Mono', monospace" font-size="7" fill="#ffd56b">Sub-second event</text>
+
+    <!-- Arrow 1 -->
+    <line x1="140" y1="45" x2="190" y2="45" stroke="#f5b738" stroke-width="1.5" stroke-dasharray="4,3" />
+    <polygon points="190,45 182,41 182,49" fill="#f5b738" />
+
+    <!-- Lambda / Docker -->
+    <rect x="195" y="0" width="150" height="90" fill="#1b1710" stroke="#4a3e28" />
+    <text x="12" y="24" font-family="'Space Mono', monospace" font-size="9" font-weight="700" fill="#f5b738">AWS LAMBDA</text>
+    <text x="12" y="44" font-family="'Space Mono', monospace" font-size="8" fill="#c4b89d">cyvcf2 + Docker</text>
+    <text x="12" y="60" font-family="'Space Mono', monospace" font-size="7.5" fill="#8f846d">Random Forest</text>
+    <text x="12" y="74" font-family="'Space Mono', monospace" font-size="7" fill="#ffd56b">Pytest Mocks</text>
+
+    <!-- Arrow 2 -->
+    <line x1="345" y1="45" x2="395" y2="45" stroke="#f5b738" stroke-width="1.5" stroke-dasharray="4,3" />
+    <polygon points="395,45 387,41 387,49" fill="#f5b738" />
+
+    <!-- Output Accuracy Gauge -->
+    <rect x="400" y="0" width="130" height="90" fill="#1f1911" stroke="#f5b738" stroke-width="1.5" />
+    <text x="12" y="24" font-family="'Space Mono', monospace" font-size="9" font-weight="700" fill="#f5b738">INFERENCE</text>
+    <text x="12" y="58" font-family="'Barlow Condensed', sans-serif" font-size="32" font-weight="700" fill="#f5b738">82%</text>
+    <text x="70" y="54" font-family="'Space Mono', monospace" font-size="8" fill="#ffd56b">ACCURACY</text>
+    <text x="12" y="76" font-family="'Space Mono', monospace" font-size="7" fill="#c4b89d">RESISTANT: RIF/INH</text>
+  </g>
+
+  <!-- Metrics Bar -->
+  <text x="35" y="365" font-family="'Space Mono', monospace" font-size="8" fill="#f5b738">
+    CYVCF2 + AWS LAMBDA DOCKER INFERENCE // EVENT-DRIVEN S3 WORKFLOW // SUB-SECOND LATENCY
+  </text>
+</svg>

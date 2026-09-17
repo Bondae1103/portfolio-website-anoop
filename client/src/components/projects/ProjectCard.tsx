@@ -72,7 +72,7 @@ export function ProjectCard({
         <p>{project.description}</p>
 
         <div className="stack-list">
-          {project.stack.map((item) => (
+          {project.stack.slice(0, 3).map((item) => (
             <span key={item}>{item}</span>
           ))}
         </div>
