@@ -133,41 +133,72 @@ const experiences = [
   {
     role: "Software Developer Intern",
     company: "THERMO FISHER SCIENTIFIC",
+    division: "Cloud Enterprise Applications // Automation QA",
     location: "BENGALURU, INDIA",
     period: "MAY — JUL 2026",
     status: "● LIVE LOG",
     statusClass: "status-live",
+    highlight:
+      "Migrated enterprise test suites to Playwright with Agentic AI (Codex), achieving major performance gains and coverage across 4 cloud applications.",
     bullets: [
       "Built automated test scripts for four cloud-based Thermo Fisher Scientific enterprise applications.",
       "Evaluated and migrated legacy Selenium test scripts to Playwright, significantly improving execution speed, test reliability, and maintainability.",
       "Applied agentic AI techniques (Codex) alongside Git and CI/CD pipelines to streamline test creation, validation, and automated refactoring.",
       "Optimized overall software testing efficiency and coverage across cross-functional engineering teams.",
     ],
+    tags: [
+      "Playwright",
+      "Selenium Migration",
+      "Agentic AI (Codex)",
+      "CI/CD Pipelines",
+      "Cloud Testing",
+      "Python",
+    ],
   },
   {
     role: "Bioinformatics Trainee",
     company: "BRIC — RAJIV GANDHI CENTRE FOR BIOTECHNOLOGY",
+    division: "Structural Biology & Biophysical Simulations",
     location: "THIRUVANANTHAPURAM, INDIA",
     period: "MAY — JUN 2025",
     status: "● BIO SIGNAL",
     statusClass: "status-bio",
+    highlight:
+      "Automated molecular dynamics pipelines and trajectory analyses for HIV protease & nAChR drug targets using GROMACS, AutoDock, and Bio3D in R.",
     bullets: [
       "Developed automated computational pipelines for protein–ligand interaction modeling and virtual screening using GROMACS and AutoDock.",
       "Conducted molecular dynamics simulations and trajectory analytics with Bio3D in R, contributing to research on HIV protease and nicotinic acetylcholine receptors.",
       "Automated RMSD, RMSF, Rg, and DCCM dynamical cross-correlation calculations to ensure statistical reproducibility across simulation batches.",
       "Worked hands-on with VMD, PyMOL, UCSF Chimera, and CHARMM-GUI for 3D macromolecular modeling and biophysical structural characterization.",
     ],
+    tags: [
+      "GROMACS",
+      "AutoDock Vina",
+      "Bio3D (R)",
+      "VMD & PyMOL",
+      "RMSD / DCCM Analytics",
+      "CHARMM-GUI",
+    ],
   },
   {
     role: "Digital Marketing Intern",
     company: "THOUGHTLINE DIGITAL",
+    division: "Campaign Analytics & Growth Telemetry",
     location: "THIRUVANANTHAPURAM, INDIA",
     period: "JUN 2024",
     status: "● FIELD LOG",
     statusClass: "status-active",
+    highlight:
+      "Spearheaded user outreach analytics and conversion funnel tracking to optimize digital marketing workflows.",
     bullets: [
       "Contributed to digital campaign strategy, user outreach analytics, and data-driven marketing workflows.",
       "Gained valuable experience in cross-functional communication and analytics-driven optimization.",
+    ],
+    tags: [
+      "Audience Analytics",
+      "Funnel Tracking",
+      "Data Workflows",
+      "Cross-Functional Comm",
     ],
   },
 ];
@@ -451,24 +482,6 @@ export default function Home() {
               <b>COMPUTATIONAL BIOLOGY</b><i>×</i>
               <b>CLOUD & DEVOPS</b>
             </div>
-            <div className="stats-bar">
-              <div className="stat-unit">
-                <span className="stat-val">8.82</span>
-                <span className="stat-label">CGPA // VIT VELLORE</span>
-              </div>
-              <div className="stat-unit">
-                <span className="stat-val">13,753</span>
-                <span className="stat-label">ISOLATES // AFRO-TB CALLSET</span>
-              </div>
-              <div className="stat-unit">
-                <span className="stat-val">44 / 44</span>
-                <span className="stat-label">PYTEST VERIFICATION SUITE</span>
-              </div>
-              <div className="stat-unit">
-                <span className="stat-val">5</span>
-                <span className="stat-label">PRODUCTION CODEBASES</span>
-              </div>
-            </div>
           </section>
 
           {/* 02 / PROJECTS (Paginated Menu-Style Console) */}
@@ -477,36 +490,85 @@ export default function Home() {
           {/* 03 / EXPERIENCE */}
           <section className="log-section" id="experience">
             <div className="section-tag">03 / EXPERIENCE & INDUSTRY LOG</div>
-            <div className="log-grid">
+            <div className="experience-layout">
               <div className="section-heading">
-                <h2>Time <em>logged.</em></h2>
-                <p>Software development, test automation, and biophysical pipeline engineering.</p>
+                <span className="micro-label">INDUSTRY ARCHIVE</span>
+                <h2>Time<br /><em>logged.</em></h2>
+                <p>Software development, enterprise QA automation, and biophysical simulation pipelines across commercial and research labs.</p>
+
+                {/* Experience Telemetry Console */}
+                <div className="experience-telemetry-box">
+                  <div className="experience-telemetry-title">
+                    <span className="pulse-dot" /> SYSTEM LOG AUDIT // ACTIVE
+                  </div>
+                  <div className="exp-telemetry-row">
+                    <span className="exp-telemetry-key">ENTERPRISE CODEBASES</span>
+                    <span className="exp-telemetry-val">4 Cloud Apps (Thermo Fisher)</span>
+                  </div>
+                  <div className="exp-telemetry-row">
+                    <span className="exp-telemetry-key">CORE DISCIPLINES</span>
+                    <span className="exp-telemetry-val">Automated QA · Molecular Dynamics</span>
+                  </div>
+                  <div className="exp-telemetry-row">
+                    <span className="exp-telemetry-key">KEY TOOLSETS</span>
+                    <span className="exp-telemetry-val">Playwright · Codex AI · GROMACS</span>
+                  </div>
+                </div>
               </div>
-              <div className="timeline">
+
+              <div className="experience-stream">
                 {experiences.map((exp, i) => (
-                  <motion.div
-                    className="timeline-entry"
+                  <motion.article
+                    className="experience-card"
                     key={i}
-                    initial={{ opacity: 0, y: 12 }}
+                    initial={{ opacity: 0, y: 18 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-30px" }}
-                    transition={{ duration: 0.35, delay: i * 0.08 }}
+                    transition={{ duration: 0.4, delay: i * 0.1 }}
                   >
-                    <div className="timeline-date">
-                      {exp.period}
-                      <br />
-                      <span className={`log-status ${exp.statusClass}`}>{exp.status}</span>
+                    <div className="exp-card-top">
+                      <div className="exp-badge-group">
+                        <span className="exp-index-badge">EXP-0{i + 1}</span>
+                        <span className={`log-status-pill ${exp.statusClass}`}>
+                          <span className="status-indicator-dot" /> {exp.status}
+                        </span>
+                      </div>
+                      <div className="exp-meta-capsule">
+                        <span className="exp-period-tag">{exp.period}</span>
+                        <span className="exp-location-tag">{exp.location}</span>
+                      </div>
                     </div>
-                    <div>
+
+                    <div className="exp-role-block">
                       <h3>{exp.role}</h3>
-                      <b>{exp.company} // {exp.location}</b>
-                      <ul className="timeline-bullets">
-                        {exp.bullets.map((b, bi) => (
-                          <li key={bi}>{b}</li>
-                        ))}
-                      </ul>
+                      <div className="exp-company-sub">
+                        <b className="exp-company-name">{exp.company}</b>
+                        <span className="exp-division-tag">[{exp.division}]</span>
+                      </div>
                     </div>
-                  </motion.div>
+
+                    <div className="exp-highlight-strip">
+                      <span className="exp-highlight-kicker">KEY IMPACT</span>
+                      <p>{exp.highlight}</p>
+                    </div>
+
+                    <ul className="exp-bullet-list">
+                      {exp.bullets.map((b, bi) => (
+                        <li key={bi}>
+                          <span className="exp-bullet-arrow">›</span>
+                          <span>{b}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <div className="exp-tags-row">
+                      {exp.tags.map((tag, ti) => (
+                        <span key={ti} className="exp-tag-pill">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </motion.article>
                 ))}
               </div>
             </div>
