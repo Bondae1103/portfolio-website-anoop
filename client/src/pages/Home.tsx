@@ -27,10 +27,12 @@ import {
   Terminal,
   Trophy,
   Users,
+  Network,
   X,
 } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ProjectsSection } from "@/components/projects/ProjectsSection";
+import { HeroVisual } from "@/components/hero/HeroVisual";
 
 const skillCategories = [
   { id: "all", label: "ALL CAPABILITIES [12]" },
@@ -237,39 +239,59 @@ const toastmastersData = {
 
 const interestTiles = [
   {
-    kicker: "STRATEGY & TACTICAL DEPTH",
-    title: "High-Skill Gaming & Worldbuilding",
+    kicker: "COLLECTIVE INTELLIGENCE & SOCIAL INSECTS",
+    title: "Swarm Intelligence & Emergence",
+    icon: Network,
+    badge: "BEES & ANTS → SWARM ALGORITHMS",
+    description:
+      "I've had quite a fascination with ants and bees since I was younger—I even kept an ant farm as a kid. That early curiosity about how simple individual agents communicate through stigmergy and pheromone trails without central authority eventually developed into an interest in swarm biology, decentralized routing algorithms, and emergent collective intelligence.",
+  },
+  {
+    kicker: "PALEONTOLOGY & EVOLUTIONARY BIOLOGY",
+    title: "Speculative Evolution",
+    icon: Dna,
+    badge: "DEEP TIME & ADAPTIVE MORPHOLOGY",
+    description:
+      "This stemmed directly from my deep fascination with paleontology, especially dinosaurs. I’ve always been drawn to the thought experiment of predicting what kind of phenotypes, anatomical adaptations, and physiological traits can be observed under specific environmental conditions and selective pressures across deep time.",
+  },
+  {
+    kicker: "HISTORICAL LINGUISTICS & ANTHROPOLOGY",
+    title: "Etymology & Linguistic Evolution",
+    icon: BookOpen,
+    badge: "PHONETICS & CULTURAL DRIFT",
+    description:
+      "A more recent interest: I’m very fascinated by how different languages and cultures arose and evolved under different historical and geographical situations. Tracking phonetic sound shifts, sound laws, proto-languages, and how vocabulary diverges over centuries reveals striking parallels to evolutionary phylogenetics.",
+  },
+];
+
+const hobbyTiles = [
+  {
+    kicker: "GAMING",
+    title: "PC & Console Gaming",
     icon: Gamepad2,
     description:
-      "Immersed in high-skill tactical execution, complex worldbuilding, and real-time decision making. Whether mastering stamina management, spatial awareness, and boss choreography in Elden Ring, executing fast-paced squad coordination and movement mechanics in Apex Legends, navigating chaotic frontline horde control in Warhammer: Vermintide 2, or drilling macro-mechanics, build orders, and multi-tasking in StarCraft.",
+      "Loves to play games like Elden Ring and The Witcher 3. In particular, I’ve completed the entirety of Elden Ring along with its DLC (Shadow of the Erdtree) and am now playing through The Witcher 3. I also enjoy dropping into Apex Legends, Warhammer: Vermintide 2, and StarCraft.",
   },
   {
-    kicker: "CLADISTICS & DEEP TIME",
-    title: "Evolutionary Biology & Phylogenetics",
-    icon: Dna,
-    description:
-      "Endlessly fascinated by the tree of life, morphological transitions, and phylogenetic reconstruction. I love exploring how evolutionary mechanisms sculpt biological complexity across deep time.",
-  },
-  {
-    kicker: "COLLECTIVE INTELLIGENCE",
-    title: "Swarm Biology & Emergent Algorithms",
-    icon: Cpu,
-    description:
-      "Deeply interested in social insect biology (ants, bees, termites) and how decentralized, stigmergic communication in nature translates into computational swarm intelligence, routing algorithms, and distributed systems.",
-  },
-  {
-    kicker: "LITERATURE & WORLDBUILDING",
-    title: "Fiction, Non-Fiction & Speculative Evolution",
+    kicker: "READING",
+    title: "Fiction & Non-Fiction",
     icon: BookOpen,
     description:
-      "An avid reader of both fiction and non-fiction. I dabble heavily in speculative evolution thought experiments and am a huge fan of C. M. Kosemen's All Tomorrows and speculative biology worldbuilding.",
+      "Enjoys reading across both fiction and non-fiction—from compelling narrative storytelling and sci-fi to books covering history, science, anthropology, and how things work.",
   },
   {
-    kicker: "FIELD PURSUITS & ANALOG CHANNELS",
-    title: "Swimming, Birdwatching & Deep Dives",
+    kicker: "SWIMMING",
+    title: "Distance Swimming",
     icon: Compass,
     description:
-      "Recharging through long-distance swimming, field birdwatching with binoculars, and falling down late-night Wikipedia rabbit holes tracing obscure historical genealogies and scientific breakthroughs.",
+      "Long-distance swimming is my favorite way to stay active and clear my head. Doing laps in the pool provides a great rhythm and mental reset away from screens.",
+  },
+  {
+    kicker: "BIRDWATCHING",
+    title: "Field Birdwatching",
+    icon: Microscope,
+    description:
+      "Casual field birdwatching outdoors with a pair of binoculars. I enjoy exploring natural habitats, observing avian behaviors, and spotting resident and migratory species.",
   },
 ];
 
@@ -300,10 +322,43 @@ export default function Home() {
           <a href="#skills" onClick={closeMobile}>05 / SKILLS</a>
           <a href="#certifications" onClick={closeMobile}>06 / CERTS & AWARDS</a>
           <a href="#leadership" onClick={closeMobile}>07 / LEADERSHIP</a>
-          <a href="#interests" onClick={closeMobile}>08 / CURIOSITIES</a>
-          <a href="#contact" onClick={closeMobile}>09 / CONTACT</a>
+          <a href="#interests" onClick={closeMobile}>08 / INTERESTS</a>
+          <a href="#hobbies" onClick={closeMobile}>09 / HOBBIES</a>
+          <a href="#contact" onClick={closeMobile}>10 / CONTACT</a>
+          <div className="mobile-socials-drawer">
+            <a href="https://github.com/Bondae1103" target="_blank" rel="noopener noreferrer" className="mobile-social-link">
+              <Github size={13} /> GITHUB
+            </a>
+            <a href="https://www.linkedin.com/in/anoop-nair-4a180928a/" target="_blank" rel="noopener noreferrer" className="mobile-social-link">
+              <Linkedin size={13} /> LINKEDIN
+            </a>
+          </div>
         </nav>
-        <div className="system-status"><CircleDot size={11} /> AVAILABLE FOR SIGNALS</div>
+        <div className="topbar-right-cluster">
+          <div className="topbar-social-icons">
+            <a
+              href="https://github.com/Bondae1103"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="topbar-social-btn"
+              title="GitHub Profile"
+              aria-label="GitHub Profile"
+            >
+              <Github size={14} />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/anoop-nair-4a180928a/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="topbar-social-btn"
+              title="LinkedIn Profile"
+              aria-label="LinkedIn Profile"
+            >
+              <Linkedin size={14} />
+            </a>
+          </div>
+          <div className="system-status"><CircleDot size={11} /> AVAILABLE FOR SIGNALS</div>
+        </div>
       </header>
 
       <div className="mission-layout" id="top">
@@ -319,8 +374,9 @@ export default function Home() {
             <a href="#skills"><span>05</span> SKILLS</a>
             <a href="#certifications"><span>06</span> CERTS & AWARDS</a>
             <a href="#leadership"><span>07</span> LEADERSHIP</a>
-            <a href="#interests"><span>08</span> CURIOSITIES</a>
-            <a href="#contact"><span>09</span> TRANSMIT</a>
+            <a href="#interests"><span>08</span> INTERESTS</a>
+            <a href="#hobbies"><span>09</span> HOBBIES</a>
+            <a href="#contact"><span>10</span> TRANSMIT</a>
           </nav>
           <div className="rail-footer">VIT VELLORE / CS-BIO<br />THIRUVANANTHAPURAM → VELLORE</div>
         </aside>
@@ -341,18 +397,21 @@ export default function Home() {
               </p>
               <div className="hero-actions">
                 <a className="primary-action" href="#work">VIEW SELECTED WORK <ChevronRight size={17} /></a>
-                <a className="text-action" href="https://github.com/Bondae1103" target="_blank" rel="noopener noreferrer">GITHUB REPOS <Github size={15} /></a>
+                <a className="hero-social-action" href="https://github.com/Bondae1103" target="_blank" rel="noopener noreferrer">
+                  <Github size={14} /> GITHUB
+                </a>
+                <a className="hero-social-action" href="https://www.linkedin.com/in/anoop-nair-4a180928a/" target="_blank" rel="noopener noreferrer">
+                  <Linkedin size={14} /> LINKEDIN
+                </a>
               </div>
             </motion.div>
             <motion.div
-              className="hero-art"
+              className="hero-art-wrapper"
               initial={{ opacity: 0, scale: 0.97 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.65, delay: 0.1, ease: "easeOut" }}
             >
-              <img src="/images/fossil-signal-hero.svg" alt="Golden-amber research console visualization" />
-              <div className="hero-overlay-label top">SPECIMEN / AN-001<br /><span>SOFTWARE &amp; BIOSYSTEMS CONSOLE</span></div>
-              <div className="hero-overlay-label bottom"><span className="pulse-dot" /> SIGNAL LOCKED<br /><span>LAT 08.52° N / LONG 76.94° E</span></div>
+              <HeroVisual />
             </motion.div>
             <div className="hero-footnote">SCROLL TO INVESTIGATE <span>↓</span></div>
           </section>
@@ -391,6 +450,24 @@ export default function Home() {
               <b>TEST AUTOMATION</b><i>×</i>
               <b>COMPUTATIONAL BIOLOGY</b><i>×</i>
               <b>CLOUD & DEVOPS</b>
+            </div>
+            <div className="stats-bar">
+              <div className="stat-unit">
+                <span className="stat-val">8.82</span>
+                <span className="stat-label">CGPA // VIT VELLORE</span>
+              </div>
+              <div className="stat-unit">
+                <span className="stat-val">13,753</span>
+                <span className="stat-label">ISOLATES // AFRO-TB CALLSET</span>
+              </div>
+              <div className="stat-unit">
+                <span className="stat-val">44 / 44</span>
+                <span className="stat-label">PYTEST VERIFICATION SUITE</span>
+              </div>
+              <div className="stat-unit">
+                <span className="stat-val">5</span>
+                <span className="stat-label">PRODUCTION CODEBASES</span>
+              </div>
             </div>
           </section>
 
@@ -620,16 +697,16 @@ export default function Home() {
             </div>
           </section>
 
-          {/* 08 / HOBBIES & INTERESTS */}
+          {/* 08 / INTERESTS */}
           <section className="interests-section" id="interests">
             <div className="section-header">
               <div>
-                <div className="section-tag">08 / CURIOSITIES & PURSUITS</div>
-                <h2>Beyond the <em>terminal.</em></h2>
+                <div className="section-tag">08 / INTERESTS</div>
+                <h2>Things that <em>fascinate me.</em></h2>
               </div>
-              <span className="section-caption">TACTICAL GAMING, EVOLUTIONARY BIOLOGY &amp; FIELD PURSUITS</span>
+              <span className="section-caption">SWARM BIOLOGY, SPECULATIVE EVOLUTION &amp; LINGUISTIC DIVERGENCE</span>
             </div>
-            <div className="interests-grid">
+            <div className="interests-grid interests-beehive-grid">
               {interestTiles.map((tile, i) => {
                 const Icon = tile.icon;
                 return (
@@ -639,11 +716,46 @@ export default function Home() {
                     initial={{ opacity: 0, y: 16 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-20px" }}
-                    transition={{ duration: 0.35, delay: i * 0.07 }}
+                    transition={{ duration: 0.35, delay: i * 0.08 }}
                   >
                     <div className="interest-tile-top">
                       <span className="interest-tile-kicker">{tile.kicker}</span>
                       <Icon size={18} color="#f5b738" />
+                    </div>
+                    <h3>{tile.title}</h3>
+                    <div className="interest-badge-pill">{tile.badge}</div>
+                    <p>{tile.description}</p>
+                    <div className="interest-tile-accent" aria-hidden="true" />
+                  </motion.div>
+                );
+              })}
+            </div>
+          </section>
+
+          {/* 09 / HOBBIES */}
+          <section className="hobbies-section" id="hobbies">
+            <div className="section-header">
+              <div>
+                <div className="section-tag">09 / HOBBIES</div>
+                <h2>Off the <em>clock.</em></h2>
+              </div>
+              <span className="section-caption">CASUAL PURSUITS, FAVORITE GAMES &amp; DOWNTIME</span>
+            </div>
+            <div className="hobbies-grid">
+              {hobbyTiles.map((tile, i) => {
+                const Icon = tile.icon;
+                return (
+                  <motion.div
+                    className="hobby-tile"
+                    key={i}
+                    initial={{ opacity: 0, y: 14 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-20px" }}
+                    transition={{ duration: 0.32, delay: i * 0.06 }}
+                  >
+                    <div className="hobby-tile-header">
+                      <span className="hobby-tile-kicker">{tile.kicker}</span>
+                      <Icon size={16} color="#ffd56b" />
                     </div>
                     <h3>{tile.title}</h3>
                     <p>{tile.description}</p>
@@ -653,10 +765,10 @@ export default function Home() {
             </div>
           </section>
 
-          {/* 09 / CONTACT */}
+          {/* 10 / CONTACT */}
           <section className="contact-section" id="contact">
             <div className="contact-top">
-              <div className="section-tag">09 / OPEN CHANNEL</div>
+              <div className="section-tag">10 / OPEN CHANNEL</div>
               <ShieldAlert size={22} />
             </div>
             <h2>Have a project or<br />role worth <em>talking about?</em></h2>
@@ -678,10 +790,11 @@ export default function Home() {
               </span>
               <div className="socials">
                 <a
-                  href="https://www.linkedin.com/in/anoop-nair-4a180928a"
+                  href="https://www.linkedin.com/in/anoop-nair-4a180928a/"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Anoop Nair LinkedIn Profile"
+                  title="LinkedIn Profile"
                 >
                   <Linkedin size={17} />
                 </a>
@@ -690,6 +803,7 @@ export default function Home() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Anoop Nair GitHub Profile"
+                  title="GitHub Profile"
                 >
                   <Github size={17} />
                 </a>
@@ -701,8 +815,25 @@ export default function Home() {
 
       <footer>
         <span>© 2026 ANOOP NAIR // B.TECH CSE (BIOINFORMATICS)</span>
-        <span>BUILT WITH CURIOSITY / POWERED BY EVIDENCE</span>
-        <span>AN-001 // END OF TRANSMISSION</span>
+        <div className="footer-social-links">
+          <a
+            href="https://github.com/Bondae1103"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub Profile"
+          >
+            <Github size={13} /> GITHUB
+          </a>
+          <a
+            href="https://www.linkedin.com/in/anoop-nair-4a180928a/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn Profile"
+          >
+            <Linkedin size={13} /> LINKEDIN
+          </a>
+        </div>
+        <span>AN-001 // TRANSMISSION LOCKED</span>
       </footer>
     </div>
   );

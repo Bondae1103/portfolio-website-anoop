@@ -51,7 +51,8 @@ export function ProjectCard({
       <div className={`project-image ${isSpecimenPlot ? "specimen-mount" : ""}`}>
         {project.imageCaption && (
           <div className="specimen-caption-tag" aria-hidden="true">
-            {project.imageCaption}
+            <span className="specimen-caption-title">{project.imageCaption}</span>
+            <span className="specimen-tag-badge">CONSOLE // 600×400</span>
           </div>
         )}
         <div className="image-viewport">
