@@ -424,7 +424,7 @@ export default function Home() {
               <div className="eyebrow"><ScanLine size={14} /> FIELD NOTE 00 — SOFTWARE, INTELLIGENCE & BIOSYSTEMS</div>
               <h1>Engineering code,<br />intelligence & <em>biological</em><br />systems.</h1>
               <p className="hero-intro">
-                Hey, I’m <strong>Anoop Nair</strong> — a Software Engineer &amp; Data-Oriented Developer completing Computer Science Engineering at <strong>VIT Vellore</strong>. I take problems from messy, high-dimensional data all the way to robust, working software — whether that’s distributed RAG microservices, containerized cloud inference on AWS, automated QA with Playwright, or machine learning for complex biosystems.
+                Hey, I’m <strong>Anoop Nair</strong> — a Software Engineer &amp; Data-Oriented Developer completing Computer Science Engineering at <strong>VIT Vellore</strong>. I take problems from messy, high-dimensional data all the way to robust, working software — whether that’s modern web design &amp; intuitive frontends, distributed RAG microservices, containerized cloud inference on AWS, automated QA with Playwright, or machine learning for complex biosystems.
               </p>
               <div className="hero-actions">
                 <a className="primary-action" href="#work">VIEW SELECTED WORK <ChevronRight size={17} /></a>
@@ -464,7 +464,7 @@ export default function Home() {
               </div>
               <div className="about-copy">
                 <p>
-                  I’m a final-year <strong>Computer Science Engineering (Bioinformatics)</strong> undergraduate at <strong>Vellore Institute of Technology (VIT)</strong>. I approach engineering from a software-first foundation: building clean, modular backends, architecting resilient test suites, leveraging cloud microservices, and deploying applied AI to complex data.
+                  I’m a final-year <strong>Computer Science Engineering (Bioinformatics)</strong> undergraduate at <strong>Vellore Institute of Technology (VIT)</strong>. I approach engineering from a software-first foundation: crafting modern web design and responsive user interfaces, building clean, modular backends, architecting resilient test suites, leveraging cloud microservices, and deploying applied AI to complex data.
                 </p>
                 <p>
                   My background in computational biology and high-dimensional genomics is what sharpens my edge as a software developer: having engineered pipelines for 13,000+ bacterial genomes and multi-cohort RNA-seq datasets, I treat data integrity, algorithmic efficiency, and test repeatability as core engineering imperatives. Whether developing distributed RAG pipelines with <strong>FastAPI, Celery, and Qdrant</strong>, migrating enterprise test automation to Playwright at <strong>Thermo Fisher Scientific</strong>, or automating molecular dynamics pipelines at <strong>BRIC-RGCB</strong>, I thrive on building reliable systems that just work.
