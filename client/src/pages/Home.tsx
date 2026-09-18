@@ -464,13 +464,16 @@ export default function Home() {
               </div>
               <div className="about-copy">
                 <p>
-                  I’m a final-year <strong>Computer Science Engineering (Bioinformatics)</strong> undergraduate at <strong>Vellore Institute of Technology (VIT)</strong>. I approach engineering from a software-first foundation: crafting modern web design and responsive user interfaces, building clean, modular backends, architecting resilient test suites, leveraging cloud microservices, and deploying applied AI to complex data.
+                  I’m a final-year <strong>Computer Science Engineering (Bioinformatics)</strong> undergraduate at <strong>Vellore Institute of Technology (VIT)</strong>. I approach engineering from a software-first foundation: crafting modern web design and responsive user interfaces, building clean, modular backends, <strong>architecting comprehensive automated testing frameworks</strong>, and deploying applied AI to complex data systems.
                 </p>
                 <p>
-                  My background in computational biology and high-dimensional genomics is what sharpens my edge as a software developer: having engineered pipelines for 13,000+ bacterial genomes and multi-cohort RNA-seq datasets, I treat data integrity, algorithmic efficiency, and test repeatability as core engineering imperatives. Whether developing distributed RAG pipelines with <strong>FastAPI, Celery, and Qdrant</strong>, migrating enterprise test automation to Playwright at <strong>Thermo Fisher Scientific</strong>, or automating molecular dynamics pipelines at <strong>BRIC-RGCB</strong>, I thrive on building reliable systems that just work.
+                  <strong>Automated testing and quality engineering are core pillars of my workflow.</strong> During my internship at <strong>Thermo Fisher Scientific</strong>, I built automated test suites across four enterprise cloud applications, spearheaded the migration of legacy Selenium suites to <strong>Playwright</strong> for significant execution speed and reliability gains, and leveraged <strong>agentic AI (Codex)</strong> alongside CI/CD pipelines to streamline test creation and maintainability. Whether developing rigorous <strong>Pytest harnesses</strong> with deterministic mocks for distributed microservices or implementing end-to-end browser automation, I treat bulletproof verification and zero-flakiness as essential software standards.
                 </p>
                 <p>
-                  Beyond engineering, serving as Vice President Membership at <strong>SOL Toastmasters Club</strong> taught me that great software requires great communication. I love collaborating with curious, ambitious teams to solve hard problems with clear questions and reproducible code.
+                  My background in computational biology and high-dimensional genomics further sharpens this engineering discipline: having engineered pipelines for 13,000+ bacterial genomes and multi-cohort RNA-seq datasets, I treat data integrity, algorithmic efficiency, and pipeline reproducibility as second nature. Combined with my work in distributed systems (<strong>FastAPI, Celery, Qdrant</strong>) and biophysical computing (<strong>GROMACS, Bio3D</strong> at <strong>BRIC-RGCB</strong>), I thrive on shipping robust, thoroughly tested software that just works.
+                </p>
+                <p>
+                  Beyond engineering, serving as Vice President Membership at <strong>SOL Toastmasters Club</strong> taught me that great software requires great communication. I love collaborating with curious, ambitious teams to solve hard problems with clear questions and clean, tested code.
                 </p>
               </div>
             </motion.div>
