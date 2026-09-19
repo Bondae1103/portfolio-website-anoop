@@ -19,14 +19,28 @@ export function ProjectCard({
 }: ProjectCardProps) {
   const cardRef = useRef<HTMLElement>(null);
   const metricRef = useRef<HTMLElement>(null);
+  const confPreRef = useRef<HTMLElement>(null);
+  const confPostRef = useRef<HTMLElement>(null);
   const isInView = useInView(cardRef, { once: true, margin: "-40px" });
   const isSpecimenPlot = project.image.includes("/images/projects/");
 
   useEffect(() => {
     if (isInView) {
       animateMetric(metricRef.current, project.metric);
+      if (project.confidencePre !== undefined) {
+        animateMetric(confPreRef.current, `${project.confidencePre}%`);
+      }
+      if (project.confidencePost !== undefined) {
+        animateMetric(confPostRef.current, `${project.confidencePost}%`);
+      }
     }
-  }, [isInView, project.id, project.metric]);
+  }, [
+    isInView,
+    project.id,
+    project.metric,
+    project.confidencePre,
+    project.confidencePost,
+  ]);
 
   const paddedIndex = String(displayIndex + 1).padStart(2, "0");
 
@@ -77,6 +91,30 @@ export function ProjectCard({
             <span key={item}>{item}</span>
           ))}
         </div>
+
+        {project.confidencePre !== undefined &&
+          project.confidencePost !== undefined && (
+            <div className="flex items-center gap-1.5 font-mono text-[10px] text-[#a39985] tracking-wider py-1 border-t border-[#383020]/60 mt-2 mb-1 select-none">
+              <span className="text-[#f5b738] font-bold">CONFIDENCE:</span>
+              <span>
+                PRE: <b ref={confPreRef} className="text-[#eee8d7]">{project.confidencePre}%</b>
+              </span>
+              <span className="text-[#f5b738]">/</span>
+              <span>
+                POST:{" "}
+                <b
+                  ref={confPostRef}
+                  className={
+                    project.confidencePost < project.confidencePre
+                      ? "text-[#e06c75]"
+                      : "text-[#ffd56b]"
+                  }
+                >
+                  {project.confidencePost}%
+                </b>
+              </span>
+            </div>
+          )}
 
         <div className="project-bottom">
           <b ref={metricRef}>{project.metric}</b>

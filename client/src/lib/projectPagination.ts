@@ -12,6 +12,8 @@ export interface Project {
   starred?: boolean;
   starredOrder?: number;
   order?: number;
+  confidencePre?: number;
+  confidencePost?: number;
 }
 
 export interface PaginationResult {

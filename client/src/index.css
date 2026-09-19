@@ -1129,6 +1129,7 @@ main { min-width: 0; }
 .status-live { color: #ffd56b; }
 .status-bio { color: #e0c279; }
 .status-active { color: #e07a5f; }
+.status-archived { color: #8c7f69; }
 
 .exp-meta-capsule {
   font-family: 'Space Mono', monospace;

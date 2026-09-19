@@ -1,4 +1,4 @@
-﻿import type { Project } from "@/lib/projectPagination";
+import type { Project } from "@/lib/projectPagination";
 
 export const projectsData: Project[] = [
   {
@@ -6,7 +6,7 @@ export const projectsData: Project[] = [
     title: "PaleoRAG: Distributed Hybrid RAG Engine",
     kicker: "DISTRIBUTED SYSTEMS / HYBRID VECTOR RAG & SSE",
     description:
-      "An asynchronous distributed RAG microservice integrating FastAPI, Celery, and Redis for concurrent scientific literature ingestion. Features hybrid dense (PubMedBERT) and sparse (BM25) retrieval via Reciprocal Rank Fusion in Qdrant, real-time SSE token streaming, post-hoc citation verification (0% hallucination rate, 100% Recall@5), and a 44-test Pytest harness.",
+      "Hybrid dense + sparse retrieval with Reciprocal Rank Fusion, SSE token streaming, and post-hoc citation checking — 100% Recall@5, zero hallucinated citations on my eval set. The eval set is small enough that I'd want to test this on someone else's corpus before believing my own numbers.",
     stack: ["FastAPI", "Qdrant", "Redis"],
     image: "/images/projects/paleorag-console.svg",
     imageAlt:
@@ -16,13 +16,15 @@ export const projectsData: Project[] = [
     github: "https://github.com/Bondae1103/Paleo-RAG",
     starred: true,
     starredOrder: 1,
+    confidencePre: 15,
+    confidencePost: 88,
   },
   {
     id: "PX-02",
     title: "Parkinson's Disease Multi-Dataset Transcriptomics",
     kicker: "TRANSCRIPTOMICS / CONSENSUS FEATURE ENGINEERING",
     description:
-      "A biomarker discovery pipeline integrating five feature-selection methods (LASSO, Boruta, SVM-RFE, Mutual Information) with gradient-boosted classifiers. Identifies 12 consensus biomarkers across multi-cohort RNA-seq datasets, validated through LOOCV and SHAP interpretability.",
+      "A biomarker discovery pipeline integrating five feature-selection methods with gradient-boosted classifiers, isolating 12 consensus biomarkers across multi-cohort RNA-seq datasets. Validated through LOOCV and SHAP, though without wet-lab assay verification on patient tissue, they remain computational candidates.",
     stack: ["Python", "XGBoost", "SHAP"],
     image: "/images/projects/pd-volcano-console.svg",
     imageAlt:
@@ -32,13 +34,15 @@ export const projectsData: Project[] = [
     github: "https://github.com/Bondae1103/PD-DEG-MultipleML-Analyses",
     starred: true,
     starredOrder: 2,
+    confidencePre: 60,
+    confidencePost: 74,
   },
   {
     id: "PX-03",
     title: "AfroTB: Phylogeny-Aware Graph Neural Network",
     kicker: "DEEP LEARNING / GRAPH NEURAL NETWORKS & GENOMICS",
     description:
-      "A phylogeny-aware Graph Neural Network (GNN) for joint multi-task prediction of M. tuberculosis drug resistance and bacterial lineage across the Afro-TB dataset. Formulates genomic isolate topological graphs from 13,753 isolates via SNP-distance matrices, integrating PyG architectures with reproducible Python validation pipelines.",
+      "A phylogeny-aware Graph Neural Network formulating topological graphs from 13,753 isolates via SNP distances for joint drug resistance and lineage prediction. Training on sparse sub-lineages still requires manual class reweighting to keep minority variants from getting drowned out.",
     stack: ["PyTorch", "PyG (GNN)", "Python"],
     image: "/images/projects/afrotb-gnn-console.svg",
     imageAlt:
@@ -48,13 +52,15 @@ export const projectsData: Project[] = [
     github: "https://github.com/Bondae1103/AfroTB-phylo-GNN-AMR-predictor",
     starred: true,
     starredOrder: 3,
+    confidencePre: 30,
+    confidencePost: 55,
   },
   {
     id: "PX-04",
     title: "Serverless Genomic Variant Classifier (TB-Classifier)",
     kicker: "CLOUD MICROSERVICES / AWS LAMBDA & DOCKER",
     description:
-      "A containerized machine learning inference pipeline running on AWS Lambda with S3 event triggers to predict drug-resistance profiles from M. tuberculosis VCF files in sub-second latency. Built with Docker, cyvcf2, and soft-voting ensembles with automated Pytest mock fixtures.",
+      "A containerized machine learning inference pipeline on AWS Lambda with S3 event triggers to predict drug-resistance from VCF files in sub-second latency. Soft-voting ensemble hits 82% accuracy on benchmark VCFs, though multi-allelic indels still fail parsing and fall back to unclassified.",
     stack: ["AWS Lambda", "Docker", "Scikit-learn"],
     image: "/images/projects/tb-classifier-console.svg",
     imageAlt:
@@ -64,13 +70,15 @@ export const projectsData: Project[] = [
     github: "https://github.com/Bondae1103/TB-Classifier",
     starred: false,
     order: 1,
+    confidencePre: 70,
+    confidencePost: 91,
   },
   {
     id: "PX-05",
     title: "PhytoScan: Real-Time Pathology Vision System",
     kicker: "EDGE AI / COMPUTER VISION & EMBEDDED INFERENCE",
     description:
-      "An end-to-end plant pathology detection pipeline developed for the AgriThon Hackathon 2025. Combines CVAT dataset annotation, automated image preprocessing, and custom YOLOv8/ResNet models for real-time edge diagnostic inference with sub-50ms latency.",
+      "Built in a weekend for AgriThon 2025. Sub-50ms inference on edge hardware, 78% validation accuracy — which is decent for a hackathon and nowhere near deployable. The annotation set was too small and I knew it while labelling.",
     stack: ["YOLOv8", "OpenCV", "PyTorch"],
     image: "/images/projects/phytoscan-console.svg",
     imageAlt:
@@ -80,5 +88,7 @@ export const projectsData: Project[] = [
     github: "https://github.com/Mo-Kash/PhytoScan",
     starred: false,
     order: 2,
+    confidencePre: 85,
+    confidencePost: 41,
   },
 ];

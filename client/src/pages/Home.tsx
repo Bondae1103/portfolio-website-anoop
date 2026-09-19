@@ -1,21 +1,12 @@
-/* Fossil Signal page: warm charcoal surfaces, golden-amber signal accents, evidence-led storytelling, and an approachable software-first portfolio console. */
-import { useState } from "react";
+/* Fossil Signal v2: field-lab instrument console, amber phosphor accents, telemetry-driven storytelling. */
+import { useState, useRef } from "react";
 import {
-  ArrowUpRight,
-  Atom,
   Award,
-  BookOpen,
   ChevronRight,
   CircleDot,
-  Code2,
-  Compass,
-  Cpu,
-  Database,
-  Dna,
   ExternalLink,
   Gamepad2,
   Github,
-  GraduationCap,
   Linkedin,
   Mail,
   Menu,
@@ -23,312 +14,78 @@ import {
   Phone,
   ScanLine,
   ShieldAlert,
-  Sparkles,
   Terminal,
   Trophy,
   Users,
   Network,
+  BookOpen,
+  Dna,
   X,
 } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ProjectsSection } from "@/components/projects/ProjectsSection";
 import { HeroVisual } from "@/components/hero/HeroVisual";
+import { SectionTexture } from "@/components/texture/SectionTexture";
+import { Annotation } from "@/components/voice/Annotation";
+import { SpecimenCard } from "@/components/voice/SpecimenCard";
+import { NerdModeToggle } from "@/components/interactive/NerdModeToggle";
+import { LatencyEstimate } from "@/components/interactive/LatencyEstimate";
+import { useNerdMode } from "@/hooks/useNerdMode";
+import {
+  heroCopy,
+  aboutCopy,
+  experienceCopy,
+  educationCopy,
+  certsAwardsCopy,
+  toastmastersCopy,
+  interestsCopy,
+  hobbiesCopy,
+  contactCopy,
+  footerCopy,
+} from "@/content/copy";
+import { skillCategories, skillGroups } from "@/data/skills";
 
-const skillCategories = [
-  { id: "all", label: "ALL CAPABILITIES [12]" },
-  { id: "swe", label: "SOFTWARE & SYSTEMS [4]" },
-  { id: "ai", label: "DATA SCIENCE & AI [3]" },
-  { id: "cloud", label: "CLOUD & QA [2]" },
-  { id: "bio", label: "BIOSYSTEMS & SCIENTIFIC [3]" },
-];
-
-const skillGroups = [
-  {
-    category: "swe",
-    label: "PROGRAMMING LANGUAGES",
-    icon: Code2,
-    tag: "POLYGLOT CORE",
-    items: "Python · Java · C/C++ · TypeScript · JavaScript · SQL · Bash / Shell · R",
-  },
-  {
-    category: "swe",
-    label: "SOFTWARE ENGINEERING",
-    icon: Cpu,
-    tag: "SYSTEM DESIGN",
-    items: "OOP/OOD (SOLID) · Data Structures & Algorithms · Modular Architecture · Design Patterns · Clean Code · Complexity Analysis",
-  },
-  {
-    category: "swe",
-    label: "BACKEND & DISTRIBUTED SYSTEMS",
-    icon: Terminal,
-    tag: "MICROSERVICES",
-    items: "FastAPI · Express.js · RESTful APIs · Server-Sent Events (SSE) · Celery (Distributed Tasks) · Microservices Architecture",
-  },
-  {
-    category: "ai",
-    label: "DATA SCIENCE & ANALYTICS",
-    icon: Compass,
-    tag: "STATISTICAL RIGOR",
-    items: "Pandas · NumPy · SciPy · Scikit-learn · Statistical Modeling · Feature Selection (LASSO, Boruta, SVM-RFE) · SHAP · LOOCV",
-  },
-  {
-    category: "ai",
-    label: "AI & MACHINE LEARNING",
-    icon: Atom,
-    tag: "DEEP LEARNING & CV",
-    items: "PyTorch · PyG (Graph Neural Networks) · YOLOv8 · ResNet · OpenCV · Transformers (PubMedBERT) · XGBoost · Random Forest · Agentic AI (OpenAI Codex)",
-  },
-  {
-    category: "swe",
-    label: "DATABASES & VECTOR STORES",
-    icon: Database,
-    tag: "STORAGE & EMBEDDINGS",
-    items: "PostgreSQL · MySQL · Redis (In-Memory Cache & Message Broker) · Qdrant (Vector Database) · Schema Design · SQL Optimization",
-  },
-  {
-    category: "cloud",
-    label: "CLOUD & DEVOPS",
-    icon: Sparkles,
-    tag: "CONTAINERS & CLOUD",
-    items: "AWS (Lambda, S3) · Docker · Docker Compose · Git · GitHub Actions · CI/CD Pipelines · Linux/POSIX Environments",
-  },
-  {
-    category: "cloud",
-    label: "TESTING & AUTOMATION",
-    icon: ShieldAlert,
-    tag: "QUALITY ENGINEERING",
-    items: "Playwright · Pytest · Selenium · Vitest · Test-Driven Development (TDD) · BDD (Gherkin) · Mock Fixtures · Headed/Headless QA",
-  },
-  {
-    category: "swe",
-    label: "WEB DEVELOPMENT",
-    icon: BookOpen,
-    tag: "FRONTEND ARSENAL",
-    items: "React 19 · TypeScript · Vite · Tailwind CSS · Zod · Radix UI · Responsive UI Architecture",
-  },
-  {
-    category: "bio",
-    label: "BIOINFORMATICS & GENOMICS",
-    icon: Dna,
-    tag: "GENOMIC PIPELINES",
-    items: "cyvcf2 (VCF Parsing) · RNA-seq / Transcriptomics · Differential Expression (limma, edgeR) · Biomarker Discovery · NCBI / BLAST",
-  },
-  {
-    category: "bio",
-    label: "SCIENTIFIC COMPUTING & BIOPHYSICS",
-    icon: Microscope,
-    tag: "MOLECULAR DYNAMICS",
-    items: "Molecular Dynamics (GROMACS, Bio3D) · Molecular Docking (AutoDock Vina) · VMD · PyMOL · UCSF Chimera · CHARMM-GUI · PCA Trajectories",
-  },
-  {
-    category: "ai",
-    label: "DEVELOPER TOOLS & VISUALIZATION",
-    icon: ScanLine,
-    tag: "DATA VISUALIZATION",
-    items: "Git · VS Code · CVAT (Annotation) · Postman · Linux Shell · Matplotlib · Seaborn · Tableau · Recharts",
-  },
-];
-
-const experiences = [
-  {
-    role: "Software Developer Intern",
-    company: "THERMO FISHER SCIENTIFIC",
-    division: "Cloud Enterprise Applications // Automation QA",
-    location: "BENGALURU, INDIA",
-    period: "MAY — JUL 2026",
-    status: "● LIVE LOG",
-    statusClass: "status-live",
-    highlight:
-      "Migrated enterprise test suites to Playwright with Agentic AI (Codex), achieving major performance gains and coverage across 4 cloud applications.",
-    bullets: [
-      "Built automated test scripts for four cloud-based Thermo Fisher Scientific enterprise applications.",
-      "Evaluated and migrated legacy Selenium test scripts to Playwright, significantly improving execution speed, test reliability, and maintainability.",
-      "Applied agentic AI techniques (Codex) alongside Git and CI/CD pipelines to streamline test creation, validation, and automated refactoring.",
-      "Optimized overall software testing efficiency and coverage across cross-functional engineering teams.",
-    ],
-    tags: [
-      "Playwright",
-      "Selenium Migration",
-      "Agentic AI (Codex)",
-      "CI/CD Pipelines",
-      "Cloud Testing",
-      "Python",
-    ],
-  },
-  {
-    role: "Bioinformatics Trainee",
-    company: "BRIC — RAJIV GANDHI CENTRE FOR BIOTECHNOLOGY",
-    division: "Structural Biology & Biophysical Simulations",
-    location: "THIRUVANANTHAPURAM, INDIA",
-    period: "MAY — JUN 2025",
-    status: "● BIO SIGNAL",
-    statusClass: "status-bio",
-    highlight:
-      "Automated molecular dynamics pipelines and trajectory analyses for HIV protease & nAChR drug targets using GROMACS, AutoDock, and Bio3D in R.",
-    bullets: [
-      "Developed automated computational pipelines for protein–ligand interaction modeling and virtual screening using GROMACS and AutoDock.",
-      "Conducted molecular dynamics simulations and trajectory analytics with Bio3D in R, contributing to research on HIV protease and nicotinic acetylcholine receptors.",
-      "Automated RMSD, RMSF, Rg, and DCCM dynamical cross-correlation calculations to ensure statistical reproducibility across simulation batches.",
-      "Worked hands-on with VMD, PyMOL, UCSF Chimera, and CHARMM-GUI for 3D macromolecular modeling and biophysical structural characterization.",
-    ],
-    tags: [
-      "GROMACS",
-      "AutoDock Vina",
-      "Bio3D (R)",
-      "VMD & PyMOL",
-      "RMSD / DCCM Analytics",
-      "CHARMM-GUI",
-    ],
-  },
-  {
-    role: "Digital Marketing Intern",
-    company: "THOUGHTLINE DIGITAL",
-    division: "Campaign Analytics & Growth Telemetry",
-    location: "THIRUVANANTHAPURAM, INDIA",
-    period: "JUN 2024",
-    status: "● FIELD LOG",
-    statusClass: "status-active",
-    highlight:
-      "Spearheaded user outreach analytics and conversion funnel tracking to optimize digital marketing workflows.",
-    bullets: [
-      "Contributed to digital campaign strategy, user outreach analytics, and data-driven marketing workflows.",
-      "Gained valuable experience in cross-functional communication and analytics-driven optimization.",
-    ],
-    tags: [
-      "Audience Analytics",
-      "Funnel Tracking",
-      "Data Workflows",
-      "Cross-Functional Comm",
-    ],
-  },
-];
-
-const educationList = [
-  {
-    institution: "VELLORE INSTITUTE OF TECHNOLOGY (VIT)",
-    degree: "Bachelor of Technology (B.Tech) in Computer Science & Engineering",
-    specialization: "Specialization in Bioinformatics",
-    period: "2023 — 2027",
-    location: "VELLORE, TAMIL NADU, INDIA",
-    score: "8.82 CGPA",
-    description:
-      "Pursuing a rigorous blend of core Computer Science foundations (Data Structures, Algorithms, OOP with Java/C++, Operating Systems, Cloud, QA Automation) and computational biology pipelines (Genomics, Structural Biology, Machine Learning for Life Sciences).",
-  },
-  {
-    institution: "ST. THOMAS RESIDENTIAL CENTRAL SCHOOL",
-    degree: "Senior Secondary (Class XII) & High School (Class X)",
-    specialization: null,
-    period: "2010 — 2022",
-    location: "THIRUVANANTHAPURAM, KERALA, INDIA",
-    score: "Class XII: 92% · Class X: 91%",
-    description:
-      "Graduated with distinguished academic honors across secondary and senior secondary school education.",
-  },
-];
-
-const singleCertification = {
-  title: "AI Fluency Framework & Foundations",
-  issuer: "VERIFIED CREDENTIAL // SKILLJAR",
-  badge: "AI & PROMPT ENGINEERING",
-  url: "https://verify.skilljar.com/c/ooi733esyygd",
-  description:
-    "Comprehensive certification validating core competencies in modern AI frameworks, prompt engineering architectures, LLM foundations, and applied agentic workflows.",
-};
-
-const achievements = [
-  {
-    title: "Toastmasters International 'Triple Crown' Award",
-    meta: "TOASTMASTERS INTERNATIONAL // 2025—26",
-    badge: "TRIPLE CROWN",
-    description:
-      "Secured the prestigious Triple Crown award during my tenure in Toastmasters (2025–26), recognizing milestone achievements in speech delivery, executive communication, and educational pathways.",
-  },
-  {
-    title: "Branch Merit List & Cash Prize (First Year)",
-    meta: "VIT VELLORE // 1ST YEAR MERIT",
-    badge: "9.42 GPA",
-    description:
-      "Placed on the branch merit list in my first year after securing a 9.42 GPA in the first semester, receiving an official certificate of merit and a cash prize for academic distinction.",
-  },
-];
-
-const toastmastersData = {
-  club: "SOL TOASTMASTERS CLUB",
-  role: "VICE PRESIDENT MEMBERSHIP (VPM)",
-  quote: "“Turning complex technical concepts into clear, engaging human conversations.”",
-  description:
-    "Served as Vice President Membership at SOL Toastmasters Club, leading membership growth, guest onboarding, and community engagement initiatives. Regularly delivered prepared speeches and participated in impromptu Table Topics, continually refining executive communication, active listening, impromptu thinking, and team leadership.",
-  skills: [
-    "Executive Leadership",
-    "Public Speaking",
-    "Technical Storytelling",
-    "Active Listening",
-    "Team Mentorship",
-    "Meeting Facilitation",
-  ],
-};
-
-const interestTiles = [
-  {
-    kicker: "COLLECTIVE INTELLIGENCE & SOCIAL INSECTS",
-    title: "Swarm Intelligence & Emergence",
-    icon: Network,
-    badge: "BEES & ANTS → SWARM ALGORITHMS",
-    description:
-      "I've had quite a fascination with ants and bees since I was younger—I even kept an ant farm as a kid. That early curiosity about how simple individual agents communicate through stigmergy and pheromone trails without central authority eventually developed into an interest in swarm biology, decentralized routing algorithms, and emergent collective intelligence.",
-  },
-  {
-    kicker: "PALEONTOLOGY & EVOLUTIONARY BIOLOGY",
-    title: "Speculative Evolution",
-    icon: Dna,
-    badge: "DEEP TIME & ADAPTIVE MORPHOLOGY",
-    description:
-      "This stemmed directly from my deep fascination with paleontology, especially dinosaurs. I’ve always been drawn to the thought experiment of predicting what kind of phenotypes, anatomical adaptations, and physiological traits can be observed under specific environmental conditions and selective pressures across deep time.",
-  },
-  {
-    kicker: "HISTORICAL LINGUISTICS & ANTHROPOLOGY",
-    title: "Etymology & Linguistic Evolution",
-    icon: BookOpen,
-    badge: "PHONETICS & CULTURAL DRIFT",
-    description:
-      "A more recent interest: I’m very fascinated by how different languages and cultures arose and evolved under different historical and geographical situations. Tracking phonetic sound shifts, sound laws, proto-languages, and how vocabulary diverges over centuries reveals striking parallels to evolutionary phylogenetics.",
-  },
-];
-
-const hobbyTiles = [
-  {
-    kicker: "GAMING",
-    title: "PC & Console Gaming",
-    icon: Gamepad2,
-    description:
-      "Loves to play games like Elden Ring and The Witcher 3. In particular, I’ve completed the entirety of Elden Ring along with its DLC (Shadow of the Erdtree) and am now playing through The Witcher 3. I also enjoy dropping into Apex Legends, Warhammer: Vermintide 2, and StarCraft.",
-  },
-  {
-    kicker: "READING",
-    title: "Fiction & Non-Fiction",
-    icon: BookOpen,
-    description:
-      "Enjoys reading across both fiction and non-fiction—from compelling narrative storytelling and sci-fi to books covering history, science, anthropology, and how things work.",
-  },
-  {
-    kicker: "SWIMMING",
-    title: "Distance Swimming",
-    icon: Compass,
-    description:
-      "Long-distance swimming is my favorite way to stay active and clear my head. Doing laps in the pool provides a great rhythm and mental reset away from screens.",
-  },
-  {
-    kicker: "BIRDWATCHING",
-    title: "Field Birdwatching",
-    icon: Microscope,
-    description:
-      "Casual field birdwatching outdoors with a pair of binoculars. I enjoy exploring natural habitats, observing avian behaviors, and spotting resident and migratory species.",
-  },
-];
+function SectionTag({ tag, telemetry }: { tag: string; telemetry?: string }) {
+  const { active } = useNerdMode();
+  return (
+    <div className="section-tag-cluster mb-2">
+      <div className="section-tag">{tag}</div>
+      {active && telemetry && (
+        <div
+          className="font-mono text-[9px] text-[#f5b738]/70 tracking-widest uppercase mt-0.5 animate-in fade-in duration-200"
+          style={{ fontFamily: "'Space Mono', monospace" }}
+        >
+          {telemetry}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function Home() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [selectedSkillCategory, setSelectedSkillCategory] = useState("all");
+  const [specimenOpen, setSpecimenOpen] = useState(false);
+
+  // Triple-click handler on brand lockup
+  const clickCountRef = useRef(0);
+  const clickTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const handleBrandClick = (e: React.MouseEvent) => {
+    clickCountRef.current += 1;
+    if (clickTimerRef.current) clearTimeout(clickTimerRef.current);
+
+    if (clickCountRef.current >= 3) {
+      e.preventDefault();
+      setSpecimenOpen(true);
+      clickCountRef.current = 0;
+      return;
+    }
+
+    clickTimerRef.current = setTimeout(() => {
+      clickCountRef.current = 0;
+    }, 450);
+  };
 
   const closeMobile = () => setMobileOpen(false);
 
@@ -340,11 +97,31 @@ export default function Home() {
     <div className="site-shell">
       <div className="ambient-grid" aria-hidden="true" />
       <header className="topbar">
-        <a className="brand-lockup" href="#top" onClick={closeMobile} aria-label="Anoop Nair home">
+        <a
+          className="brand-lockup cursor-pointer select-none"
+          href="#top"
+          onClick={(e) => {
+            closeMobile();
+            handleBrandClick(e);
+          }}
+          aria-label="Anoop Nair home (Triple click for acquisition notes)"
+          title="Triple-click for specimen acquisition notes"
+        >
           <img src="/images/mark.svg" alt="" className="brand-mark" />
-          <span><b>ANOOP</b><small>/ NAIR</small></span>
+          <span>
+            <b>ANOOP</b>
+            <small>/ NAIR</small>
+          </span>
         </a>
-        <button className="mobile-menu" aria-label={mobileOpen ? "Close navigation" : "Open navigation"} onClick={() => setMobileOpen(!mobileOpen)}>{mobileOpen ? <X /> : <Menu />}</button>
+
+        <button
+          className="mobile-menu"
+          aria-label={mobileOpen ? "Close navigation" : "Open navigation"}
+          onClick={() => setMobileOpen(!mobileOpen)}
+        >
+          {mobileOpen ? <X /> : <Menu />}
+        </button>
+
         <nav className={mobileOpen ? "topnav is-open" : "topnav"}>
           <a href="#about" onClick={closeMobile}>01 / ABOUT</a>
           <a href="#work" onClick={closeMobile}>02 / PROJECTS</a>
@@ -357,15 +134,27 @@ export default function Home() {
           <a href="#hobbies" onClick={closeMobile}>09 / HOBBIES</a>
           <a href="#contact" onClick={closeMobile}>10 / CONTACT</a>
           <div className="mobile-socials-drawer">
-            <a href="https://github.com/Bondae1103" target="_blank" rel="noopener noreferrer" className="mobile-social-link">
+            <a
+              href="https://github.com/Bondae1103"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mobile-social-link"
+            >
               <Github size={13} /> GITHUB
             </a>
-            <a href="https://www.linkedin.com/in/anoop-nair-4a180928a/" target="_blank" rel="noopener noreferrer" className="mobile-social-link">
+            <a
+              href="https://www.linkedin.com/in/anoop-nair-4a180928a/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mobile-social-link"
+            >
               <Linkedin size={13} /> LINKEDIN
             </a>
           </div>
         </nav>
+
         <div className="topbar-right-cluster">
+          <NerdModeToggle />
           <div className="topbar-social-icons">
             <a
               href="https://github.com/Bondae1103"
@@ -388,9 +177,14 @@ export default function Home() {
               <Linkedin size={14} />
             </a>
           </div>
-          <div className="system-status"><CircleDot size={11} /> AVAILABLE FOR SIGNALS</div>
+          <div className="system-status">
+            <CircleDot size={11} /> AVAILABLE FOR SIGNALS
+          </div>
         </div>
       </header>
+
+      {/* Easter Egg Specimen Acquisition Dialog */}
+      <SpecimenCard open={specimenOpen} onOpenChange={setSpecimenOpen} />
 
       <div className="mission-layout" id="top">
         <aside className="mission-rail">
@@ -409,47 +203,69 @@ export default function Home() {
             <a href="#hobbies"><span>09</span> HOBBIES</a>
             <a href="#contact"><span>10</span> TRANSMIT</a>
           </nav>
-          <div className="rail-footer">VIT VELLORE / CS-BIO<br />THIRUVANANTHAPURAM → VELLORE</div>
+          <div className="rail-footer">
+            VIT VELLORE / CS-BIO
+            <br />
+            THIRUVANANTHAPURAM → VELLORE
+          </div>
         </aside>
 
         <main>
           {/* HERO SECTION */}
-          <section className="hero-section">
+          <section className="hero-section relative overflow-hidden">
+            <SectionTexture variant="grid" />
             <motion.div
-              className="hero-copy"
+              className="hero-copy relative z-10"
               initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, ease: "easeOut" }}
             >
-              <div className="eyebrow"><ScanLine size={14} /> FIELD NOTE 00 — SOFTWARE, INTELLIGENCE & BIOSYSTEMS</div>
-              <h1>Engineering code,<br />intelligence & <em>biological</em><br />systems.</h1>
-              <p className="hero-intro">
-                Hey, I’m <strong>Anoop Nair</strong> — a Software Engineer &amp; Data-Oriented Developer completing Computer Science Engineering at <strong>VIT Vellore</strong>. I take problems from messy, high-dimensional data all the way to robust, working software — whether that’s modern web design &amp; intuitive frontends, distributed RAG microservices, containerized cloud inference on AWS, automated QA with Playwright, or machine learning for complex biosystems.
-              </p>
+              <div className="eyebrow">
+                <ScanLine size={14} /> {heroCopy.eyebrow}
+              </div>
+              <h1 style={{ whiteSpace: "pre-line" }}>{heroCopy.headline}</h1>
+              <p className="hero-intro">{heroCopy.intro}</p>
               <div className="hero-actions">
-                <a className="primary-action" href="#work">VIEW SELECTED WORK <ChevronRight size={17} /></a>
-                <a className="hero-social-action" href="https://github.com/Bondae1103" target="_blank" rel="noopener noreferrer">
-                  <Github size={14} /> GITHUB
+                <a className="primary-action" href="#work">
+                  {heroCopy.viewWorkAction} <ChevronRight size={17} />
                 </a>
-                <a className="hero-social-action" href="https://www.linkedin.com/in/anoop-nair-4a180928a/" target="_blank" rel="noopener noreferrer">
-                  <Linkedin size={14} /> LINKEDIN
+                <a
+                  className="hero-social-action"
+                  href="https://github.com/Bondae1103"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Github size={14} /> {heroCopy.githubAction}
+                </a>
+                <a
+                  className="hero-social-action"
+                  href="https://www.linkedin.com/in/anoop-nair-4a180928a/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Linkedin size={14} /> {heroCopy.linkedinAction}
                 </a>
               </div>
             </motion.div>
             <motion.div
-              className="hero-art-wrapper"
+              className="hero-art-wrapper relative z-10"
               initial={{ opacity: 0, scale: 0.97 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.65, delay: 0.1, ease: "easeOut" }}
             >
               <HeroVisual />
             </motion.div>
-            <div className="hero-footnote">SCROLL TO INVESTIGATE <span>↓</span></div>
+            <div className="hero-footnote">
+              {heroCopy.scrollPrompt} <span>↓</span>
+            </div>
           </section>
 
           {/* 01 / ABOUT */}
           <section className="intel-band" id="about">
-            <div className="section-tag">01 / SUBJECT PROFILE</div>
+            <SectionTag
+              tag={aboutCopy.tag}
+              telemetry="[ADDR: 0x414E · THREADS: 08 · LOC: 12.97°N]"
+            />
             <motion.div
               className="intel-grid"
               initial={{ opacity: 0, y: 20 }}
@@ -458,32 +274,32 @@ export default function Home() {
               transition={{ duration: 0.5, ease: "easeOut" }}
             >
               <div className="section-heading">
-                <span className="micro-label">CURRENT POSITION</span>
-                <h2>Between the<br /><em>lab & the stack.</em></h2>
-                <div className="stamp">AN / CS-BIO<br /><b>8.82</b> CGPA @ VIT</div>
+                <span className="micro-label">{aboutCopy.microLabel}</span>
+                <h2 style={{ whiteSpace: "pre-line" }}>{aboutCopy.headline}</h2>
+                <div className="stamp">
+                  {aboutCopy.stampRole}
+                  <br />
+                  <b>{aboutCopy.stampMetric}</b>
+                </div>
               </div>
               <div className="about-copy">
-                <p>
-                  I’m a final-year <strong>Computer Science Engineering (Bioinformatics)</strong> undergraduate at <strong>Vellore Institute of Technology (VIT)</strong>. I approach engineering from a software-first foundation: crafting modern web design and responsive user interfaces, building clean, modular backends, <strong>architecting comprehensive automated testing frameworks</strong>, and deploying applied AI to complex data systems.
-                </p>
-                <p>
-                  <strong>Automated testing and quality engineering are core pillars of my workflow.</strong> During my internship at <strong>Thermo Fisher Scientific</strong>, I built automated test suites across four enterprise cloud applications, spearheaded the migration of legacy Selenium suites to <strong>Playwright</strong> for significant execution speed and reliability gains, and leveraged <strong>agentic AI (Codex)</strong> alongside CI/CD pipelines to streamline test creation and maintainability. Whether developing rigorous <strong>Pytest harnesses</strong> with deterministic mocks for distributed microservices or implementing end-to-end browser automation, I treat bulletproof verification and zero-flakiness as essential software standards.
-                </p>
-                <p>
-                  My background in computational biology and high-dimensional genomics further sharpens this engineering discipline: having engineered pipelines for 13,000+ bacterial genomes and multi-cohort RNA-seq datasets, I treat data integrity, algorithmic efficiency, and pipeline reproducibility as second nature. Combined with my work in distributed systems (<strong>FastAPI, Celery, Qdrant</strong>) and biophysical computing (<strong>GROMACS, Bio3D</strong> at <strong>BRIC-RGCB</strong>), I thrive on shipping robust, thoroughly tested software that just works.
-                </p>
-                <p>
-                  Beyond engineering, serving as Vice President Membership at <strong>SOL Toastmasters Club</strong> taught me that great software requires great communication. I love collaborating with curious, ambitious teams to solve hard problems with clear questions and clean, tested code.
-                </p>
+                <p>{aboutCopy.p1}</p>
+                <p>{aboutCopy.p2}</p>
+                <p>{aboutCopy.p3}</p>
+                <p>{aboutCopy.p4}</p>
+                <div className="pt-2">
+                  <Annotation text={aboutCopy.annotation} />
+                </div>
               </div>
             </motion.div>
             <div className="interest-strip">
-              <span>TECH VECTORS</span>
-              <b>SOFTWARE ENGINEERING</b><i>×</i>
-              <b>MACHINE LEARNING</b><i>×</i>
-              <b>TEST AUTOMATION</b><i>×</i>
-              <b>COMPUTATIONAL BIOLOGY</b><i>×</i>
-              <b>CLOUD & DEVOPS</b>
+              <span>{aboutCopy.techVectorsLabel}</span>
+              {aboutCopy.techVectors.map((vector, vi) => (
+                <span key={vector} className="inline-flex items-center">
+                  <b>{vector}</b>
+                  {vi < aboutCopy.techVectors.length - 1 && <i>×</i>}
+                </span>
+              ))}
             </div>
           </section>
 
@@ -491,36 +307,52 @@ export default function Home() {
           <ProjectsSection />
 
           {/* 03 / EXPERIENCE */}
-          <section className="log-section" id="experience">
-            <div className="section-tag">03 / EXPERIENCE & INDUSTRY LOG</div>
+          <section className="log-section relative overflow-hidden" id="experience">
+            <SectionTexture variant="ticks" />
+            <SectionTag
+              tag={experienceCopy.tag}
+              telemetry="[LOGS: 0x03 · BUFFER: VERIFIED · AUDIT: PASS]"
+            />
             <div className="experience-layout">
               <div className="section-heading">
-                <span className="micro-label">INDUSTRY ARCHIVE</span>
-                <h2>Time<br /><em>logged.</em></h2>
-                <p>Software development, enterprise QA automation, and biophysical simulation pipelines across commercial and research labs.</p>
+                <span className="micro-label">{experienceCopy.microLabel}</span>
+                <h2 style={{ whiteSpace: "pre-line" }}>{experienceCopy.headline}</h2>
+                <p>{experienceCopy.intro}</p>
 
                 {/* Experience Telemetry Console */}
                 <div className="experience-telemetry-box">
                   <div className="experience-telemetry-title">
-                    <span className="pulse-dot" /> SYSTEM LOG AUDIT // ACTIVE
+                    <span className="pulse-dot" /> {experienceCopy.telemetry.title}
                   </div>
                   <div className="exp-telemetry-row">
-                    <span className="exp-telemetry-key">ENTERPRISE CODEBASES</span>
-                    <span className="exp-telemetry-val">4 Cloud Apps (Thermo Fisher)</span>
+                    <span className="exp-telemetry-key">
+                      {experienceCopy.telemetry.enterpriseAppsKey}
+                    </span>
+                    <span className="exp-telemetry-val">
+                      {experienceCopy.telemetry.enterpriseAppsVal}
+                    </span>
                   </div>
                   <div className="exp-telemetry-row">
-                    <span className="exp-telemetry-key">CORE DISCIPLINES</span>
-                    <span className="exp-telemetry-val">Automated QA · Molecular Dynamics</span>
+                    <span className="exp-telemetry-key">
+                      {experienceCopy.telemetry.disciplinesKey}
+                    </span>
+                    <span className="exp-telemetry-val">
+                      {experienceCopy.telemetry.disciplinesVal}
+                    </span>
                   </div>
                   <div className="exp-telemetry-row">
-                    <span className="exp-telemetry-key">KEY TOOLSETS</span>
-                    <span className="exp-telemetry-val">Playwright · Codex AI · GROMACS</span>
+                    <span className="exp-telemetry-key">
+                      {experienceCopy.telemetry.toolsetsKey}
+                    </span>
+                    <span className="exp-telemetry-val">
+                      {experienceCopy.telemetry.toolsetsVal}
+                    </span>
                   </div>
                 </div>
               </div>
 
               <div className="experience-stream">
-                {experiences.map((exp, i) => (
+                {experienceCopy.experiences.map((exp, i) => (
                   <motion.article
                     className="experience-card"
                     key={i}
@@ -577,16 +409,19 @@ export default function Home() {
             </div>
           </section>
 
-          {/* 04 / EDUCATION (Strictly separate from experience) */}
+          {/* 04 / EDUCATION */}
           <section className="education-section" id="education">
-            <div className="section-tag">04 / ACADEMIC PROFILE</div>
+            <SectionTag
+              tag={educationCopy.tag}
+              telemetry="[ACAD_TREE: VIT_CSE_BIO · CGPA_SIG: 8.82]"
+            />
             <div className="education-layout">
               <div className="section-heading">
-                <h2>Formal <em>education.</em></h2>
-                <p>Strong foundations in computer science theory, systems programming, and computational life sciences.</p>
+                <h2>{educationCopy.headline}</h2>
+                <p>{educationCopy.intro}</p>
               </div>
               <div className="education-cards">
-                {educationList.map((edu, idx) => (
+                {educationCopy.items.map((edu, idx) => (
                   <motion.div
                     className="education-card"
                     key={idx}
@@ -598,12 +433,26 @@ export default function Home() {
                     <div className="education-card-top">
                       <div>
                         <h3>{edu.institution}</h3>
-                        <b>{edu.location} // {edu.period}</b>
+                        <b>
+                          {edu.location} // {edu.period}
+                        </b>
                       </div>
                       <span className="education-tag">{edu.score}</span>
                     </div>
-                    <div style={{ color: "#f2b84b", fontFamily: "'Space Mono', monospace", fontSize: "11px", marginBottom: "8px" }}>
-                      {edu.degree} {edu.specialization ? <>— <span style={{ color: "#d5e0c7" }}>{edu.specialization}</span></> : null}
+                    <div
+                      style={{
+                        color: "#f2b84b",
+                        fontFamily: "'Space Mono', monospace",
+                        fontSize: "11px",
+                        marginBottom: "8px",
+                      }}
+                    >
+                      {edu.degree}{" "}
+                      {edu.specialization ? (
+                        <>
+                          — <span style={{ color: "#d5e0c7" }}>{edu.specialization}</span>
+                        </>
+                      ) : null}
                     </div>
                     <p>{edu.description}</p>
                   </motion.div>
@@ -613,21 +462,27 @@ export default function Home() {
           </section>
 
           {/* 05 / SKILLS ARSENAL */}
-          <section className="skills-section" id="skills">
-            <div className="section-header">
+          <section className="skills-section relative overflow-hidden" id="skills">
+            <SectionTexture variant="dots" />
+            <div className="section-header relative z-10">
               <div>
-                <div className="section-tag">05 / TOOLKIT & CAPABILITIES</div>
+                <SectionTag
+                  tag="05 / TOOLKIT & CAPABILITIES"
+                  telemetry="[MATRIX: 12_MODULES · DECAY_MONITOR: ACTIVE]"
+                />
                 <h2>Technical <em>arsenal.</em></h2>
               </div>
               <span className="section-caption">MODERN SOFTWARE & SCIENTIFIC SHOWCASE</span>
             </div>
 
             {/* Interactive Channel Filters */}
-            <div className="skills-filter-bar">
+            <div className="skills-filter-bar relative z-10">
               {skillCategories.map((cat) => (
                 <button
                   key={cat.id}
-                  className={`skill-filter-btn ${selectedSkillCategory === cat.id ? "is-active" : ""}`}
+                  className={`skill-filter-btn cursor-pointer ${
+                    selectedSkillCategory === cat.id ? "is-active" : ""
+                  }`}
                   onClick={() => setSelectedSkillCategory(cat.id)}
                 >
                   {cat.label}
@@ -635,28 +490,40 @@ export default function Home() {
               ))}
             </div>
 
-            <div className="skills-grid">
+            <div className="skills-grid relative z-10">
               <AnimatePresence mode="popLayout">
-                {filteredSkills.map(({ label, icon: Icon, tag, items }, idx) => (
-                  <motion.div
-                    className="skill-card"
-                    key={label}
-                    layout
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.25, delay: idx * 0.025 }}
-                  >
-                    <Icon size={22} />
-                    <div>
-                      <h3>
-                        <span>{label}</span>
-                        <span style={{ fontSize: "8.5px", color: "#f5b738", fontWeight: 400, letterSpacing: "0.08em" }}>[{tag}]</span>
-                      </h3>
-                      <p>{items}</p>
-                    </div>
-                  </motion.div>
-                ))}
+                {filteredSkills.map((skill, idx) => {
+                  const Icon = skill.icon;
+                  return (
+                    <motion.div
+                      className="skill-card"
+                      key={skill.label}
+                      layout
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.95 }}
+                      transition={{ duration: 0.25, delay: idx * 0.025 }}
+                    >
+                      <Icon size={22} />
+                      <div>
+                        <h3>
+                          <span>{skill.label}</span>
+                          <span
+                            style={{
+                              fontSize: "8.5px",
+                              color: "#f5b738",
+                              fontWeight: 400,
+                              letterSpacing: "0.08em",
+                            }}
+                          >
+                            [{skill.tag}]
+                          </span>
+                        </h3>
+                        <p>{skill.items}</p>
+                      </div>
+                    </motion.div>
+                  );
+                })}
               </AnimatePresence>
             </div>
           </section>
@@ -665,15 +532,20 @@ export default function Home() {
           <section className="certifications-section" id="certifications">
             <div className="section-header">
               <div>
-                <div className="section-tag">06 / VERIFIED CREDENTIALS & AWARDS</div>
-                <h2>Certifications & <em>achievements.</em></h2>
+                <SectionTag
+                  tag={certsAwardsCopy.tag}
+                  telemetry="[HASH: 0x733ESYYGD · MERIT: BRANCH_TOP]"
+                />
+                <h2>{certsAwardsCopy.headline}</h2>
               </div>
-              <span className="section-caption">VERIFIED ACCREDITATIONS & HONORS</span>
+              <span className="section-caption">{certsAwardsCopy.caption}</span>
             </div>
-            
-            {/* 1. Single AI Fluency Certification */}
+
+            {/* 1. Verified Certification */}
             <div style={{ marginBottom: "50px" }}>
-              <div className="micro-label" style={{ color: "#f2b84b", marginBottom: "20px" }}>VERIFIED CERTIFICATION</div>
+              <div className="micro-label" style={{ color: "#f2b84b", marginBottom: "20px" }}>
+                VERIFIED CERTIFICATION
+              </div>
               <motion.div
                 className="cert-single-box"
                 initial={{ opacity: 0, y: 12 }}
@@ -683,14 +555,25 @@ export default function Home() {
               >
                 <div className="cert-card-header" style={{ marginBottom: "4px" }}>
                   <Award size={22} color="#f2b84b" />
-                  <span className="cert-badge">{singleCertification.badge}</span>
+                  <span className="cert-badge">{certsAwardsCopy.singleCertification.badge}</span>
                 </div>
-                <h3>{singleCertification.title}</h3>
-                <p>{singleCertification.description}</p>
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "16px", marginTop: "8px" }}>
-                  <span className="cert-issuer">{singleCertification.issuer}</span>
+                <h3>{certsAwardsCopy.singleCertification.title}</h3>
+                <p>{certsAwardsCopy.singleCertification.description}</p>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    flexWrap: "wrap",
+                    gap: "16px",
+                    marginTop: "8px",
+                  }}
+                >
+                  <span className="cert-issuer">
+                    {certsAwardsCopy.singleCertification.issuer}
+                  </span>
                   <a
-                    href={singleCertification.url}
+                    href={certsAwardsCopy.singleCertification.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="cert-verify-link"
@@ -704,9 +587,11 @@ export default function Home() {
 
             {/* 2. Key Achievements */}
             <div id="achievements">
-              <div className="micro-label" style={{ color: "#f2b84b", marginBottom: "20px" }}>KEY HONORS & AWARDS</div>
+              <div className="micro-label" style={{ color: "#f2b84b", marginBottom: "20px" }}>
+                KEY HONORS & AWARDS
+              </div>
               <div className="cards-grid-2">
-                {achievements.map((ach, i) => (
+                {certsAwardsCopy.achievements.map((ach, i) => (
                   <motion.div
                     className="achievement-card"
                     key={i}
@@ -717,7 +602,12 @@ export default function Home() {
                   >
                     <div className="achievement-card-header">
                       <Trophy size={20} color="#f2b84b" />
-                      <span className="cert-badge" style={{ color: "#f2b84b", borderColor: "#554422" }}>{ach.badge}</span>
+                      <span
+                        className="cert-badge"
+                        style={{ color: "#f2b84b", borderColor: "#554422" }}
+                      >
+                        {ach.badge}
+                      </span>
                     </div>
                     <h3>{ach.title}</h3>
                     <p>{ach.description}</p>
@@ -728,13 +618,16 @@ export default function Home() {
             </div>
           </section>
 
-          {/* 07 / CLUB & VOLUNTEER WORK (Toastmasters) */}
+          {/* 07 / LEADERSHIP & COMMUNITY */}
           <section className="club-section" id="leadership">
-            <div className="section-tag">07 / LEADERSHIP & COMMUNITY</div>
+            <SectionTag
+              tag={toastmastersCopy.tag}
+              telemetry="[VPM_KEY: SOL_TM · FREQ: 440Hz_VOX]"
+            />
             <div className="club-layout">
               <div className="section-heading">
-                <h2>Voice & <em>leadership.</em></h2>
-                <p>Developing executive presence, impromptu communication, and community leadership.</p>
+                <h2>{toastmastersCopy.headline}</h2>
+                <p>{toastmastersCopy.intro}</p>
               </div>
               <div>
                 <motion.div
@@ -745,15 +638,23 @@ export default function Home() {
                   transition={{ duration: 0.4 }}
                 >
                   <div className="club-role-chip">
-                    <Users size={14} /> {toastmastersData.role}
+                    <Users size={14} /> {toastmastersCopy.role}
                   </div>
-                  <h3>{toastmastersData.club}</h3>
-                  <blockquote style={{ margin: "0 0 16px", color: "#f2b84b", fontStyle: "italic", fontSize: "15px", fontFamily: "'IBM Plex Sans', sans-serif" }}>
-                    {toastmastersData.quote}
+                  <h3>{toastmastersCopy.club}</h3>
+                  <blockquote
+                    style={{
+                      margin: "0 0 16px",
+                      color: "#f2b84b",
+                      fontStyle: "italic",
+                      fontSize: "15px",
+                      fontFamily: "'IBM Plex Sans', sans-serif",
+                    }}
+                  >
+                    {toastmastersCopy.quote}
                   </blockquote>
-                  <p>{toastmastersData.description}</p>
+                  <p>{toastmastersCopy.description}</p>
                   <div className="club-skills">
-                    {toastmastersData.skills.map((s) => (
+                    {toastmastersCopy.skills.map((s) => (
                       <span key={s}>{s}</span>
                     ))}
                   </div>
@@ -766,17 +667,21 @@ export default function Home() {
           <section className="interests-section" id="interests">
             <div className="section-header">
               <div>
-                <div className="section-tag">08 / INTERESTS</div>
-                <h2>Things that <em>fascinate me.</em></h2>
+                <SectionTag
+                  tag={interestsCopy.tag}
+                  telemetry="[SYSTEM: DECENTRALIZED_EMERGENCE · STIGMERGY: TRUE]"
+                />
+                <h2>{interestsCopy.headline}</h2>
               </div>
-              <span className="section-caption">SWARM BIOLOGY, SPECULATIVE EVOLUTION &amp; LINGUISTIC DIVERGENCE</span>
+              <span className="section-caption">{interestsCopy.caption}</span>
             </div>
             <div className="interests-grid interests-beehive-grid">
-              {interestTiles.map((tile, i) => {
-                const Icon = tile.icon;
+              {interestsCopy.tiles.map((tile, i) => {
+                const Icon =
+                  i === 0 ? Network : i === 1 ? Dna : BookOpen;
                 return (
                   <motion.div
-                    className="interest-tile"
+                    className="interest-tile group transition-all duration-250 cursor-pointer"
                     key={i}
                     initial={{ opacity: 0, y: 16 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -790,6 +695,12 @@ export default function Home() {
                     <h3>{tile.title}</h3>
                     <div className="interest-badge-pill">{tile.badge}</div>
                     <p>{tile.description}</p>
+                    {tile.extra && (
+                      <p className="mt-3 pt-2.5 border-t border-[#383020]/60 text-[12px] text-[#d5cbb5] font-mono leading-relaxed opacity-85 group-hover:opacity-100 transition-opacity">
+                        <span className="text-[#f5b738] font-bold">// NOTE:</span>{" "}
+                        {tile.extra}
+                      </p>
+                    )}
                     <div className="interest-tile-accent" aria-hidden="true" />
                   </motion.div>
                 );
@@ -801,14 +712,24 @@ export default function Home() {
           <section className="hobbies-section" id="hobbies">
             <div className="section-header">
               <div>
-                <div className="section-tag">09 / HOBBIES</div>
-                <h2>Off the <em>clock.</em></h2>
+                <SectionTag
+                  tag={hobbiesCopy.tag}
+                  telemetry="[THREAD_STATE: IDLE · CORVUS: SPOTTED]"
+                />
+                <h2>{hobbiesCopy.headline}</h2>
               </div>
-              <span className="section-caption">CASUAL PURSUITS, FAVORITE GAMES &amp; DOWNTIME</span>
+              <span className="section-caption">{hobbiesCopy.caption}</span>
             </div>
             <div className="hobbies-grid">
-              {hobbyTiles.map((tile, i) => {
-                const Icon = tile.icon;
+              {hobbiesCopy.tiles.map((tile, i) => {
+                const Icon =
+                  i === 0
+                    ? Gamepad2
+                    : i === 1
+                    ? BookOpen
+                    : i === 2
+                    ? Terminal
+                    : Microscope;
                 return (
                   <motion.div
                     className="hobby-tile"
@@ -831,27 +752,40 @@ export default function Home() {
           </section>
 
           {/* 10 / CONTACT */}
-          <section className="contact-section" id="contact">
-            <div className="contact-top">
-              <div className="section-tag">10 / OPEN CHANNEL</div>
+          <section className="contact-section relative overflow-hidden" id="contact">
+            <SectionTexture variant="vignette" />
+            <div className="contact-top relative z-10">
+              <SectionTag
+                tag={contactCopy.tag}
+                telemetry="[CHANNEL: OPEN · LATENCY: REALTIME_SCAN]"
+              />
               <ShieldAlert size={22} />
             </div>
-            <h2>Have a project or<br />role worth <em>talking about?</em></h2>
-            <p>
-              Whether you’re working on distributed systems, AI/ML engineering, cloud test automation, or computational biosystems research, transmit a message.
-            </p>
-            <a className="primary-action" href="mailto:anoop.nair.1103@gmail.com">
-              CONTACT ANOOP <Mail size={16} />
+            <h2 className="relative z-10" style={{ whiteSpace: "pre-line" }}>
+              {contactCopy.headline}
+            </h2>
+            <p className="relative z-10">{contactCopy.intro}</p>
+
+            <div className="relative z-10 max-w-md mx-auto my-4 text-left">
+              <LatencyEstimate />
+            </div>
+
+            <a
+              className="primary-action relative z-10 cursor-pointer"
+              href={`mailto:${contactCopy.email}`}
+            >
+              {contactCopy.actionText} <Mail size={16} />
             </a>
-            <div className="contact-meta">
-              <a href="mailto:anoop.nair.1103@gmail.com">
-                <Mail size={15} /> anoop.nair.1103@gmail.com
+
+            <div className="contact-meta relative z-10">
+              <a href={`mailto:${contactCopy.email}`}>
+                <Mail size={15} /> {contactCopy.email}
               </a>
-              <a href="tel:+918547560400">
-                <Phone size={15} /> +91 8547560400
+              <a href={`tel:${contactCopy.phone}`}>
+                <Phone size={15} /> {contactCopy.phone}
               </a>
               <span>
-                <Microscope size={15} /> VELLORE & THIRUVANANTHAPURAM, INDIA
+                <Microscope size={15} /> {contactCopy.location}
               </span>
               <div className="socials">
                 <a
@@ -879,29 +813,29 @@ export default function Home() {
       </div>
 
       <footer>
-        <span>© 2026 ANOOP NAIR // B.TECH CSE (BIOINFORMATICS)</span>
-        <div className="footer-social-links">
-          <a
-            href="https://github.com/Bondae1103"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub Profile"
-          >
-            <Github size={13} /> GITHUB
-          </a>
-          <a
-            href="https://www.linkedin.com/in/anoop-nair-4a180928a/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn Profile"
-          >
-            <Linkedin size={13} /> LINKEDIN
-          </a>
+        <div className="flex items-center justify-between flex-wrap gap-4 w-full pt-4 border-t border-[#383020]/60">
+          <span>{footerCopy.copyright}</span>
+          <div className="footer-social-links">
+            <a
+              href="https://github.com/Bondae1103"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub Profile"
+            >
+              <Github size={13} /> GITHUB
+            </a>
+            <a
+              href="https://www.linkedin.com/in/anoop-nair-4a180928a/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn Profile"
+            >
+              <Linkedin size={13} /> LINKEDIN
+            </a>
+          </div>
+          <span>{footerCopy.transmissionStatus}</span>
         </div>
-        <span>AN-001 // TRANSMISSION LOCKED</span>
       </footer>
     </div>
   );
 }
-
-

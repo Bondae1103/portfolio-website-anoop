@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { Activity, Dna } from "lucide-react";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { useNerdMode } from "@/hooks/useNerdMode";
+import { OperatorStatus } from "@/components/interactive/OperatorStatus";
 
 interface HelixNode {
   x: number;
@@ -16,6 +19,13 @@ interface HelixNode {
 }
 
 export function HeroVisual() {
+  const isReducedMotion = useReducedMotion();
+  const { active: isNerdModeActive } = useNerdMode();
+  const nerdModeRef = useRef(isNerdModeActive);
+  nerdModeRef.current = isNerdModeActive;
+  const reducedMotionRef = useRef(isReducedMotion);
+  reducedMotionRef.current = isReducedMotion;
+
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouseRef = useRef<{ x: number; y: number; active: boolean }>({
@@ -69,9 +79,6 @@ export function HeroVisual() {
     let time = 0;
     let lastFrameTime = performance.now();
     let frameCount = 0;
-
-    // Check prefers-reduced-motion
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     // Prominent DNA Double Helix Parameters
     const HELIX_PAIRS = 28;
@@ -173,7 +180,7 @@ export function HeroVisual() {
         lastFrameTime = now;
       }
 
-      const speedMultiplier = prefersReducedMotion ? 0 : 0.024;
+      const speedMultiplier = reducedMotionRef.current ? 0 : 0.024;
       time += speedMultiplier;
 
       // Dark console backdrop
@@ -243,13 +250,18 @@ export function HeroVisual() {
 
           // Mouse Gravitational Elastic Ripple
           if (mouse.active) {
+            const isNerd = nerdModeRef.current;
+            const repulseRadius = isNerd ? 190 : 130;
+            const forceMultiplierX = isNerd ? 28 : 16;
+            const forceMultiplierY = isNerd ? 32 : 18;
+
             const dx = mouse.x - nodeA.x;
             const dy = mouse.y - nodeA.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 130) {
-              const force = (130 - dist) / 130;
-              targetXA += (dx / dist) * force * 16;
-              targetYA += (dy / dist) * force * 18;
+            if (dist < repulseRadius) {
+              const force = (repulseRadius - dist) / repulseRadius;
+              targetXA += (dx / dist) * force * forceMultiplierX;
+              targetYA += (dy / dist) * force * forceMultiplierY;
             }
           }
 
@@ -270,13 +282,18 @@ export function HeroVisual() {
           let targetXB = targetX;
 
           if (mouse.active) {
+            const isNerd = nerdModeRef.current;
+            const repulseRadius = isNerd ? 190 : 130;
+            const forceMultiplierX = isNerd ? 28 : 16;
+            const forceMultiplierY = isNerd ? 32 : 18;
+
             const dx = mouse.x - nodeB.x;
             const dy = mouse.y - nodeB.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 130) {
-              const force = (130 - dist) / 130;
-              targetXB += (dx / dist) * force * 16;
-              targetYB += (dy / dist) * force * 18;
+            if (dist < repulseRadius) {
+              const force = (repulseRadius - dist) / repulseRadius;
+              targetXB += (dx / dist) * force * forceMultiplierX;
+              targetYB += (dy / dist) * force * forceMultiplierY;
             }
           }
 
@@ -534,6 +551,7 @@ export function HeroVisual() {
           <span className="telemetry-pill">
             LOCUS: <b>{telemetry.activeLocus}</b>
           </span>
+          <OperatorStatus />
         </div>
         <div className="hero-coord-readout">
           COORD: <span>{telemetry.coordX}</span> · <span>{telemetry.coordY}</span>

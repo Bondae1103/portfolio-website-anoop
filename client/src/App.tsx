@@ -7,6 +7,10 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 
+import { NerdModeProvider } from "./hooks/useNerdMode";
+import { ScanlineOverlay } from "./components/texture/ScanlineOverlay";
+import { NerdModeTrail } from "./components/interactive/NerdModeTrail";
+
 function Router() {
   return (
     <Switch>
@@ -22,8 +26,12 @@ export default function App() {
     <ErrorBoundary>
       <ThemeProvider defaultTheme="dark">
         <TooltipProvider>
-          <Toaster />
-          <Router />
+          <NerdModeProvider>
+            <ScanlineOverlay />
+            <NerdModeTrail />
+            <Toaster />
+            <Router />
+          </NerdModeProvider>
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>

@@ -5,6 +5,8 @@ import { getPaginatedProjects } from "@/lib/projectPagination";
 import { paginationPageVariants } from "@/lib/animations";
 import { ProjectCard } from "./ProjectCard";
 import { ProjectPagination } from "./ProjectPagination";
+import { Annotation } from "@/components/voice/Annotation";
+import { SectionTexture } from "@/components/texture/SectionTexture";
 
 export function ProjectsSection() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -33,7 +35,8 @@ export function ProjectsSection() {
   const totalPagesFormatted = String(pagination.totalPages).padStart(2, "0");
 
   return (
-    <section className="work-section" id="work" ref={sectionRef}>
+    <section className="work-section relative overflow-hidden" id="work" ref={sectionRef}>
+      <SectionTexture variant="sequence" />
       <div className="section-header">
         <div>
           <div className="section-tag">02 / EVIDENCE LOG</div>
@@ -79,6 +82,10 @@ export function ProjectsSection() {
           endIndex={pagination.endIndex}
           onPageChange={handlePageChange}
         />
+
+        <div className="mt-5 text-left">
+          <Annotation text="unscientific. self-reported. PhytoScan is the honest one." />
+        </div>
       </div>
     </section>
   );
